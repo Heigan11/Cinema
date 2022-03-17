@@ -24,9 +24,9 @@ hs_err_pid*
 
 .idea
 target
-.gitignore
 
 *.iml
 *.pdf
 *.png
 *.txt
+*.jpg
