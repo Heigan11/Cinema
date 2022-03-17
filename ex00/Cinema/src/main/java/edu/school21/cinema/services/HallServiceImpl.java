@@ -21,14 +21,14 @@ public class HallServiceImpl implements HallService{
     @Override
     @Transactional
     public void addHall(Hall hall) {
-        if (hall.getSeats() >= 0 && hall.getSeats() <= 1000)
+        if (hall.getSeats() > 0 && hall.getSeats() <= 1000)
             this.hallRepository.addHall(hall);
     }
 
     @Override
     @Transactional
     public void updateHall(Hall hall) {
-        if (hall.getSeats() >= 0 && hall.getSeats() <= 1000)
+        if (hall.getSeats() > 0 && hall.getSeats() <= 1000)
             this.hallRepository.updateHall(hall);
     }
 

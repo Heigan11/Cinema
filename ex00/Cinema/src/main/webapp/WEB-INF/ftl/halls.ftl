@@ -18,7 +18,7 @@
             text-transform: uppercase;
             text-align: center;
         }
-        form {
+        .formAdd {
             padding: 5px 0;
             border-width: 0;
             border-radius: 1em;
@@ -92,6 +92,8 @@
             <tr>
                 <th>Id</th>
                 <th>Seats</th>
+                <th>Update</th>
+                <th>Delete</th>
             </tr>
             </thead>
         <tbody>
@@ -99,15 +101,24 @@
             <tr>
                 <td>${hall.id}</td>
                 <td>${hall.seats}</td>
+                <td>
+                    <form method="post" action="/admin/panel/halls/update/${hall.id}" name="hall">
+                        <input title="Number of seats" placeholder="Seats" type="text" name="seats" size="4" required pattern="^[ 0-9]+$">
+                        <button type="submit">Update</button>
+                    </form>
+                </td>
+                <td><a href="/admin/panel/halls/delete/${hall.id}">delete</a></td>
             </tr>
             </#list>
         </tbody>
         </table>
     </div>
+    <div class="formAdd">
     <form method="post" action="/admin/panel/halls" name="hall">
         <p><b>Number of seats:</b><br><br>
-        <input title="Number of seats" type="text" name="seats" size="10">
+        <input title="Number of seats" placeholder="Seats" type="text" name="seats" size="10" required pattern="^[ 0-9]+$">
         <button type="submit">Add hall</button>
     </form>
+    </div>
 </body>
 </html>

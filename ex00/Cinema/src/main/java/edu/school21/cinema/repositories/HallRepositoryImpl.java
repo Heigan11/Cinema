@@ -7,17 +7,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
-import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceContextType;
+import javax.persistence.*;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
 @Repository
 @Transactional
-public class HallRepositoryImpl implements HallRepository{
+public class HallRepositoryImpl implements HallRepository {
 
     @PersistenceContext
 //    @PersistenceContext(type = PersistenceContextType.TRANSACTION)
@@ -55,9 +52,6 @@ public class HallRepositoryImpl implements HallRepository{
 
     @Override
     public List<Hall> listHalls() {
-        List<Hall> hallList = entityManager.createQuery("from Hall", Hall.class).getResultList();
-        for (Hall hall : hallList)
-            System.out.println("Hall list: " + hall);
-        return entityManager.createQuery("from Hall", Hall.class).getResultList();
+        return entityManager.createQuery("Select f from Hall as f order by f.id", Hall.class).getResultList();
     }
 }

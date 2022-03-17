@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
@@ -31,10 +32,24 @@ public class HallsController {
         return "halls";
     }
 
-//    @PostMapping("/addHall")
+    @GetMapping("/admin/panel/halls/delete/{id}")
+    public String deleteHall(@PathVariable("id") int id) {
+        hallService.removeHall(id);
+        return "redirect:/admin/panel/halls";
+    }
+
+    @PostMapping("/admin/panel/halls/update/{id}")
+    public String updateHall(@ModelAttribute("hall") Hall hall) {
+        System.out.println("====" + hall);
+        if (hall != null)
+            hallService.updateHall(hall);
+        return "redirect:/admin/panel/halls";
+    }
+
     @PostMapping("/admin/panel/halls")
     public String addhall(@ModelAttribute("hall") Hall hall){
-        hallService.addHall(hall);
+        if (hall != null)
+            hallService.addHall(hall);
         return "redirect:/admin/panel/halls";
 //        return "halls";
     }
