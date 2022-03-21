@@ -29,11 +29,6 @@ public class MoviesController {
 
     @GetMapping("/admin/panel/films")
     public String Movies(Model model) {
-//        Path currentRelativePath = Paths.get("");
-//        String s = currentRelativePath.toAbsolutePath().toString();
-//        System.out.println("Current absolute path is: " + s);
-//        System.out.println("Working Directory = " + System.getProperty("user.dir"));
-        File img = new File("images/no-img.jpg");
         model.addAttribute("movies", movieService.listMovies());
         return "films";
     }
@@ -47,7 +42,7 @@ public class MoviesController {
             String s = currentRelativePath.toRealPath().toString();
             if (movie.getPosterUrl() == null)
                 return FileUtils.readFileToByteArray(new File(s + "/src/main/webapp/images/no-img.jpg"));
-            return FileUtils.readFileToByteArray(new File(s + movie.getPosterUrl()));
+            return FileUtils.readFileToByteArray(new File(movie.getPosterUrl()));
         } catch (IOException e) {
             return null;
         }
@@ -59,44 +54,34 @@ public class MoviesController {
         return "redirect:/admin/panel/films";
     }
 
-//    @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
-//    public String submit(@RequestParam("file") MultipartFile file, ModelMap modelMap) {
-//        modelMap.addAttribute("file", file);
-//        return "fileUploadView";
-//    }
-
     @PostMapping("/admin/panel/films/addPoster/{id}")
     public String addPoster(@RequestParam("file") MultipartFile file,
                             @PathVariable("id") Long id) throws IOException {
-        System.out.println("Updated movie: " + movieService.getMovieById(id));
 
-        Path currentRelativePath = Paths.get("");
-        String s = currentRelativePath.toRealPath().toString();
+        if (file.getContentType().equals("image/png") ||
+                file.getContentType().equals("image/jpeg") ||
+                file.getContentType().equals("image/webp"))
+        {
+            Path currentRelativePath = Paths.get("");
+            String s = currentRelativePath.toRealPath().toString();
+            String dirPath =  s + "/src/main/webapp/images/" + id + "/";
 
-        String dirPath =  s + "/src/main/webapp/images/" + id + "/";
+            File f = new File(dirPath);
+            if (!f.exists())
+                f.mkdir();
 
-        File f = new File(dirPath);
+            for (File myFile : f.listFiles())
+                if (myFile.isFile())
+                    myFile.delete();
 
-        if (!f.exists())
-            f.mkdir();
+            Path path = Paths.get(dirPath + file.getOriginalFilename());
+            file.transferTo(path);
 
-        for (File myFile : f.listFiles())
-            if (myFile.isFile())
-                myFile.delete();
+            Movie movie = movieService.getMovieById(id);
+            movie.setPosterUrl(path.toString());
+            movieService.updateMovie(movie);
+        }
 
-        System.out.println(file.getContentType());
-        System.out.println(file.getName());
-        System.out.println(file.getOriginalFilename());
-
-//        File poster = new File(dirPath + file.getOriginalFilename());
-//            poster.createNewFile();
-
-//       file.transferTo(poster);
-
-       Path path = Paths.get(dirPath + file.getOriginalFilename());
-       file.transferTo(path);
-
-//        movieService.updateMovie(movie);
         return "redirect:/admin/panel/films";
     }
 
