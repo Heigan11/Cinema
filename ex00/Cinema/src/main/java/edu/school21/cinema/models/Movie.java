@@ -2,13 +2,6 @@ package edu.school21.cinema.models;
 
 import lombok.*;
 import javax.persistence.*;
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Base64;
-
-import org.apache.commons.io.FileUtils;
 
 @Getter
 @Setter
