@@ -31,24 +31,24 @@ public class MovieRepositoryImpl implements MovieRepository {
     }
 
     @Override
-    public void removeMovie(int id) {
+    public void removeMovie(Long id) {
         Movie movie = entityManager.find(Movie.class, id);
         if (movie != null)
             entityManager.remove(movie);
     }
 
     @Override
-    public Movie getMovieById(int id) {
-        Movie movie = entityManager.find(Movie.class, id);
-        System.out.println("Movie successfully loaded. Movie details: " + movie);
+    public Movie getMovieById(Long id) {
+//        Movie movie = entityManager.find(Movie.class, id);
+//        System.out.println("Movie successfully loaded. Movie details: " + movie);
         return entityManager.find(Movie.class, id);
     }
 
     @Override
     public List<Movie> listMovies() {
-        List<Movie> movies = entityManager.createQuery("Select f from Movie as f order by f.id", Movie.class).getResultList();
-        for (Movie movie : movies)
-            System.out.println("Movie: " + movie);
+//        List<Movie> movies = entityManager.createQuery("Select f from Movie as f order by f.id", Movie.class).getResultList();
+//        for (Movie movie : movies)
+//            System.out.println("Movie: " + movie);
         return entityManager.createQuery("Select f from Movie as f order by f.id", Movie.class).getResultList();
     }
 }

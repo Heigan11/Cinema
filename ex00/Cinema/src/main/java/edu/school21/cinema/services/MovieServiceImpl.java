@@ -32,13 +32,13 @@ public class MovieServiceImpl implements MovieService{
 
     @Override
     @Transactional
-    public void removeMovie(int id) {
+    public void removeMovie(Long id) {
         this.movieRepository.removeMovie(id);
     }
 
     @Override
     @Transactional
-    public Movie getMovieById(int id) {
+    public Movie getMovieById(Long id) {
         return this.movieRepository.getMovieById(id);
     }
 

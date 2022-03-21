@@ -9,4 +9,4 @@ CREATE TABLE movies(
                       year integer not null,
                       restriction integer not null,
                       description varchar(1000) not null,
-                      poster varchar(100));
+                      poster varchar(1000));

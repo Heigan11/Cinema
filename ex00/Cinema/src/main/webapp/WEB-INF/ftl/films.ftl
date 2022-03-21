@@ -8,7 +8,7 @@
             border-width: 0;
             border-radius: 1em;
             display: block;
-            width: 500px;
+            width: 1200px;
             height: 30px;
             margin: 200px auto 0;
             background: #60e6c5;
@@ -23,10 +23,14 @@
             border-width: 0;
             border-radius: 1em;
             display: block;
-            width: 500px;
+            width: 1200px;
             height: 90px;
             margin: auto;
             background: #60e6c5;
+            color: black;
+            font-size: 20px;
+            outline: none;
+            text-transform: uppercase;
             text-align: center;
         }
 
@@ -85,9 +89,8 @@
 <body>
 
     <h2>Movies list</h2>
-
     <div class="tables">
-        <table width="800">
+        <table width="1200">
             <thead>
             <tr>
                 <th>Id</th>
@@ -95,6 +98,9 @@
                 <th>Year</th>
                 <th>Restriction</th>
                 <th>Description</th>
+                <th>Poster</th>
+                <th>Add poster</th>
+                <th>Delete</th>
             </tr>
             </thead>
         <tbody>
@@ -103,26 +109,54 @@
                 <td>${movie.id}</td>
                 <td>${movie.title}</td>
                 <td>${movie.yearOfRelease}</td>
-                <td>${movie.restriction}</td>
+                <td>${movie.ageRestrictions}</td>
                 <td>${movie.description}</td>
+                <td>
+                    <img src='/admin/panel/films/image/${movie.id}' style="height: 100px; width: 150px;">
+                </td>
+                <td>
+                <form method="post" action="/admin/panel/films/addPoster/${movie.id}" enctype="multipart/form-data">
+                    <br>
+                    <input type="file" name="file">
+                    <button type="submit">Upload</button>
+                </form>
+                </td>
+                <td><a href="/admin/panel/films/delete/${movie.id}">delete</a></td>-->
 <#--                <td>-->
 <#--                    <form method="post" action="/admin/panel/halls/update/${hall.id}" name="hall">-->
 <#--                        <input title="Number of seats" placeholder="Seats" type="text" name="seats" size="4" required pattern="^[ 0-9]+$">-->
 <#--                        <button type="submit">Update</button>-->
 <#--                    </form>-->
 <#--                </td>-->
-<#--                <td><a href="/admin/panel/halls/delete/${hall.id}">delete</a></td>-->
             </tr>
             </#list>
         </tbody>
         </table>
     </div>
-<#--    <div class="formAdd">-->
-<#--    <form method="post" action="/admin/panel/halls" name="hall">-->
-<#--        <p><b>Number of seats:</b><br><br>-->
-<#--        <input title="Number of seats" placeholder="Seats" type="text" name="seats" size="10" required pattern="^[ 0-9]+$">-->
-<#--        <button type="submit">Add hall</button>-->
-<#--    </form>-->
-<#--    </div>-->
+    <div class="formAdd">
+    <form method="post" action="/admin/panel/films" name="movie">
+        <p><b>Add film</b><br>
+        <input title="Title" placeholder="Title" type="text" name="title" size="15" required pattern="^[0-9a-zA-Z]+$">
+        <input title="yearOfRelease" placeholder="Year of release" type="text" name="yearOfRelease" size="10" required pattern="^[0-9]+$">
+        <input title="ageRestrictions" placeholder="Age restrictions" type="text" name="ageRestrictions" size="10" required pattern="^[0-9]+$">
+        <input title="description" placeholder="Description" type="text" name="description" size="20" required >
+        <button type="submit">Add film</button>
+    </form>
+    </div>
 </body>
 </html>
+
+<#--<div class="addMovies">-->
+<#--    <form:form method="post" action="/admin/films" enctype="multipart/form-data" modelAttribute="movie">-->
+<#--        <form:label cssStyle="background-color: darkgray" path="title">Название</form:label>-->
+<#--        <form:input path="title"></form:input>-->
+<#--        <form:label cssStyle="background-color: darkgray" path="dateOfRelease">Дата выпуска</form:label>-->
+<#--        <input type="date" pattern="yyyy-MM-dd" name="releaseDate" required>-->
+<#--        <form:label cssStyle="background-color: darkgray" path="restrictions">Ограничения по возрасту</form:label>-->
+<#--        <form:input path="restrictions"></form:input>-->
+<#--        <form:label cssStyle="background-color: darkgray" path="description">Описание</form:label>-->
+<#--        <form:input path="description"></form:input>-->
+<#--        <input type="file" name="file" accept="image/*" style="background-color: darkgrey">-->
+<#--        <button type="submit">Добавить</button>-->
+<#--    </form:form>-->
+<#--</div>-->
