@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.time.LocalDateTime;
+
 @Controller
 public class SessionsController {
 
@@ -41,21 +43,22 @@ public class SessionsController {
     }
 
     @PostMapping("/admin/panel/sessions/update/{id}")
-    public String updateSession(@ModelAttribute("session") Session session) {
+    public String updateSession(@PathVariable("id") Long id,
+                                @ModelAttribute("cost") int cost) {
+        Session session = sessionService.getSessionById(id);
+        session.setCost(cost);
         sessionService.updateSession(session);
         return "redirect:/admin/panel/sessions";
     }
 
-//    @PostMapping("/admin/panel/sessions")
-//    public String addSession(@ModelAttribute("session") Session session){
-//        sessionService.addSession(session);
-//        return "redirect:/admin/panel/sessions";
-//    }
-
     @PostMapping("/admin/panel/sessions")
-    public String addSession(@ModelAttribute("date") String date){
-        System.out.println(date);
-//        sessionService.addSession(session);
+    public String addSession(@ModelAttribute("date") String date,
+                             @ModelAttribute("cost") int cost,
+                             @ModelAttribute("movie") Long movie_id,
+                             @ModelAttribute("hall") int hall_id){
+
+        sessionService.addSession(new Session(0L,LocalDateTime.parse(date), cost,
+                movieService.getMovieById(movie_id), hallService.getHallById(hall_id)));
         return "redirect:/admin/panel/sessions";
     }
 }

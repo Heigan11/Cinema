@@ -18,7 +18,6 @@ public class MovieRepositoryImpl implements MovieRepository {
     @Override
     public void addMovie(Movie movie) {
         entityManager.merge(movie);
-        System.out.println("Movie successfully saved. Movie details: " + movie);
     }
 
     @Override
@@ -27,7 +26,6 @@ public class MovieRepositoryImpl implements MovieRepository {
         if (temp != null) {
             entityManager.merge(movie);
         }
-        System.out.println("Movie successfully updated. Movie details: " + entityManager.find(Movie.class, movie.getId()));
     }
 
     @Override
@@ -39,16 +37,11 @@ public class MovieRepositoryImpl implements MovieRepository {
 
     @Override
     public Movie getMovieById(Long id) {
-//        Movie movie = entityManager.find(Movie.class, id);
-//        System.out.println("Movie successfully loaded. Movie details: " + movie);
         return entityManager.find(Movie.class, id);
     }
 
     @Override
     public List<Movie> listMovies() {
-//        List<Movie> movies = entityManager.createQuery("Select f from Movie as f order by f.id", Movie.class).getResultList();
-//        for (Movie movie : movies)
-//            System.out.println("Movie: " + movie);
         return entityManager.createQuery("Select f from Movie as f order by f.id", Movie.class).getResultList();
     }
 }

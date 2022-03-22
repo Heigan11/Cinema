@@ -10,7 +10,7 @@
             display: block;
             width: 500px;
             height: 50px;
-            margin: 200px auto 0;
+            margin: auto;
             background: #60e6c5;
             color: black;
             font-size: 25px;
@@ -21,6 +21,11 @@
     </style>
 </head>
 <body>
+<br>
+<br>
+<br>
     <a  href="/admin/panel/halls">HALLS</a>
+    <a  href="/admin/panel/films">MOVIES</a>
+    <a  href="/admin/panel/sessions">SESSIONS</a>
 </body>
 </html>

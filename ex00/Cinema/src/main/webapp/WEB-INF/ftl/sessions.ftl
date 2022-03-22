@@ -28,6 +28,8 @@
             margin: auto;
             background: #60e6c5;
             text-align: center;
+            text-transform: uppercase;
+            text-align: center;
         }
 
         table {
@@ -103,10 +105,13 @@
             <#list sessions as session>
             <tr>
                 <td>${session.id}</td>
-                <td>${session.seats}</td>
+                <td>${session.cost}</td>
+                <td>${session.date}</td>
+                <td>${session.movie.title}</td>
+                <td>Hall N ${session.hall.id}, ${session.hall.seats} seats</td>
                 <td>
                     <form method="post" action="/admin/panel/sessions/update/${session.id}" name="session">
-<#--                        <input title="Number of seats" placeholder="Seats" type="text" name="seats" size="4" required pattern="^[ 0-9]+$">-->
+                        <input title="Cost" placeholder="Cost" type="text" name="cost" size="4" required pattern="^[0-9]+$">
                         <button type="submit">Update</button>
                     </form>
                 </td>
@@ -120,16 +125,13 @@
     <form method="post" action="/admin/panel/sessions" name="session">
         <p><b>Add session</b><br><br>
         <input title="Cost" placeholder="Cost" type="text" name="cost" size="10" required pattern="^[0-9]+$">
-<#--        <input title="Time" placeholder="Time" type="datetime-local" name="date" size="10" required pattern="yyyy-MM-dd, HH:mm">-->
         <input title="Time" type="datetime-local" name="date" size="10" required pattern="yyyy-MM-dd, HH:mm">
-<#--        <input title="Movie" placeholder="Movie" type="text" name="movie" size="10" required pattern="^[0-9a-zA-Z]+$">-->
             <select title="Movie" name="movie">
                 <#list movies as movie>
                     <option value="${movie.id}">
                         ${movie.title}</option>
                 </#list>
             </select>
-<#--        <input title="Hall" placeholder="Hall" type="text" name="hall" size="10" required pattern="^[0-9a-zA-Z]+$">-->
             <select title="Hall" name="hall">
                 <#list halls as hall>
                     <option value="${hall.id}">

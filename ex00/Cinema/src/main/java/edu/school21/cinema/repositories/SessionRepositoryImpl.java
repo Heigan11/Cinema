@@ -18,7 +18,6 @@ public class SessionRepositoryImpl implements SessionRepository {
     @Override
     public void addSession(Session session) {
         entityManager.merge(session);
-        System.out.println("Session successfully saved. Session details: " + session);
     }
 
     @Override
@@ -27,7 +26,6 @@ public class SessionRepositoryImpl implements SessionRepository {
         if (temp != null) {
             entityManager.merge(session);
         }
-        System.out.println("Session successfully updated. Session details: " + entityManager.find(Session.class, session.getId()));
     }
 
     @Override
@@ -39,16 +37,11 @@ public class SessionRepositoryImpl implements SessionRepository {
 
     @Override
     public Session getSessionById(Long id) {
-//        Session Session = entityManager.find(Session.class, id);
-//        System.out.println("Session successfully loaded. Session details: " + Session);
         return entityManager.find(Session.class, id);
     }
 
     @Override
     public List<Session> listSessions() {
-//        List<Session> Sessions = entityManager.createQuery("Select f from Session as f order by f.id", Session.class).getResultList();
-//        for (Session Session : Sessions)
-//            System.out.println("Session: " + Session);
         return entityManager.createQuery("Select f from Session as f order by f.id", Session.class).getResultList();
     }
 }

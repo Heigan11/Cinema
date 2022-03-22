@@ -31,27 +31,4 @@ public class Movie {
 
     @Column(name = "poster")
     private String posterUrl;
-
-//    public Movie() throws IOException {
-//        Path currentRelativePath = Paths.get("");
-//        String s = currentRelativePath.toRealPath().toString();
-//        File img = new File(s + "/src/main/webapp/images/no-img.jpg");
-//        byte[] fileContent = FileUtils.readFileToByteArray(img);
-//        String encodedString = Base64.getEncoder().encodeToString(fileContent);
-//
-//        this.posterUrl = encodedString;
-//    }
-//
-//    public Movie(String title, int yearOfRelease, int ageRestrictions, String description) throws IOException {
-//        this.title = title;
-//        this.yearOfRelease = yearOfRelease;
-//        this.ageRestrictions = ageRestrictions;
-//        this.description = description;
-//
-//        File img = new File("/images/no-img.jpg");
-//        byte[] fileContent = FileUtils.readFileToByteArray(img);
-//        String encodedString = Base64.getEncoder().encodeToString(fileContent);
-//
-//        this.posterUrl = encodedString;
-//    }
 }
