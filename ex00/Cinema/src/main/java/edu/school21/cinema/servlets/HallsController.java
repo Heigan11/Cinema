@@ -28,7 +28,6 @@ public class HallsController {
     @GetMapping("/admin/panel/halls")
     public String halls(Model model) {
         model.addAttribute("halls", hallService.listHalls());
-//        model.addAttribute("movieHall", new MovieHall());
         return "halls";
     }
 
@@ -51,6 +50,5 @@ public class HallsController {
         if (hall != null)
             hallService.addHall(hall);
         return "redirect:/admin/panel/halls";
-//        return "halls";
     }
 }
