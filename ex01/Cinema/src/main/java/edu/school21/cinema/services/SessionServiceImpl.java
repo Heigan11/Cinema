@@ -46,5 +46,10 @@ public class SessionServiceImpl implements SessionService{
     @Transactional
     public List<Session> listSessions() {
         return this.sessionRepository.listSessions() ;
+    } @Override
+
+    @Transactional
+    public List<Session> getSessionByFilm(String filmName) {
+        return this.sessionRepository.getSessionByFilm(filmName) ;
     }
 }

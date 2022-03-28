@@ -136,7 +136,7 @@
     <div class="formAdd">
     <form method="post" action="/admin/panel/films" name="movie">
         <p><b>Add film</b><br>
-        <input title="Title" placeholder="Title" type="text" name="title" size="15" required pattern="^[0-9a-zA-Z]+$">
+        <input title="Title" placeholder="Title" type="text" name="title" size="15" required pattern="^[0-9a-zA-Z ]+$">
         <input title="yearOfRelease" placeholder="Year of release" type="text" name="yearOfRelease" size="10" required pattern="^[0-9]+$">
         <input title="ageRestrictions" placeholder="Age restrictions" type="text" name="ageRestrictions" size="10" required pattern="^[0-9]+$">
         <input title="description" placeholder="Description" type="text" name="description" size="20" required >

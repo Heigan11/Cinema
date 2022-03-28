@@ -6,7 +6,9 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 @Repository
 @Transactional
@@ -43,5 +45,17 @@ public class SessionRepositoryImpl implements SessionRepository {
     @Override
     public List<Session> listSessions() {
         return entityManager.createQuery("Select f from Session as f order by f.id", Session.class).getResultList();
+    }
+
+    @Override
+    public List<Session> getSessionByFilm(String filmName) {
+        List<Session> sessionList = entityManager.createQuery("Select f from Session as f order by f.id", Session.class).getResultList();
+        List<Session> foundedSessionList = new ArrayList<>();
+        for (Session session : sessionList){
+            String title = session.getMovie().getTitle();
+            if (title.toLowerCase().contains(filmName.toLowerCase()))
+                foundedSessionList.add(session);
+        }
+        return foundedSessionList;
     }
 }

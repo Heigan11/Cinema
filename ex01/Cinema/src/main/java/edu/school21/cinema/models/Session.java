@@ -20,7 +20,7 @@ public class Session {
     private Long id;
 
     @Column(name = "date")
-    private LocalDateTime date;
+    private String date;
 
     @Column(name = "cost")
     private int cost;

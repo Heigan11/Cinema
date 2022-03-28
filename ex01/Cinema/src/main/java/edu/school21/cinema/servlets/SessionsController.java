@@ -57,7 +57,9 @@ public class SessionsController {
                              @ModelAttribute("movie") Long movie_id,
                              @ModelAttribute("hall") int hall_id){
 
-        sessionService.addSession(new Session(0L,LocalDateTime.parse(date), cost,
+//        sessionService.addSession(new Session(0L,LocalDateTime.parse(date), cost,
+//                movieService.getMovieById(movie_id), hallService.getHallById(hall_id)));
+        sessionService.addSession(new Session(0L,date, cost,
                 movieService.getMovieById(movie_id), hallService.getHallById(hall_id)));
         return "redirect:/admin/panel/sessions";
     }

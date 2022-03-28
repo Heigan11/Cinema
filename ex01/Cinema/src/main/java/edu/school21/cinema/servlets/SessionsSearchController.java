@@ -1,6 +1,8 @@
 package edu.school21.cinema.servlets;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import edu.school21.cinema.models.Session;
+import edu.school21.cinema.models.SessionSearch;
 import edu.school21.cinema.services.HallService;
 import edu.school21.cinema.services.MovieService;
 import edu.school21.cinema.services.SessionService;
@@ -10,6 +12,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
 
 @Controller
 public class SessionsSearchController {
@@ -25,20 +32,19 @@ public class SessionsSearchController {
         this.hallService = hallService;
     }
 
-//    @GetMapping("/sessions/search")
-//    @ResponseBody
-//    public Session SessionsSearch(@RequestParam("filmName") String filmName){
-//        System.out.println("filmName =" + filmName);
-////        return "sessionsSearch";
-//        return sessionService.getSessionById(1L);
-//    }
-//
     @GetMapping("/sessions/search")
     @ResponseBody
-    public String SessionsSearch(@RequestParam("filmName") String filmName){
+    public String SessionsSearch(@RequestParam("filmName") String filmName) throws JsonProcessingException {
         System.out.println("filmName = " + filmName);
-//        return "sessionsSearch";
-        return sessionService.getSessionById(2L).toString();
+        List<Session> sessionList = sessionService.getSessionByFilm(filmName);
+        List<SessionSearch> sessionSearchList = new ArrayList<>();
+        for (Session session : sessionList){
+            sessionSearchList.add(new SessionSearch(session));
+        }
+        ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+        String json = ow.writeValueAsString(sessionSearchList);
+
+        return json;
     }
 
     @GetMapping("/sessions")

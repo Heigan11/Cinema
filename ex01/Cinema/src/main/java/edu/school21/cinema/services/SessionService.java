@@ -10,4 +10,5 @@ public interface SessionService {
     public void removeSession(Long id);
     public Session getSessionById(Long id);
     public List<Session> listSessions();
+    public List<Session> getSessionByFilm(String filmName);
 }
