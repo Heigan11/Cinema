@@ -95,29 +95,37 @@
 
     <div class="formAdd">
 
-<#--    <form method="post" action="/admin/panel/films" name="movie">-->
     <form name="filmForm">
         <input title="FilmTitle" placeholder="Title" type="text" id="input" size="40" required pattern="^[0-9a-zA-Z]+$">
-<#--        <button id="but" type="submit">Find</button>-->
         <input type="button" value="Find" id="but">
     </form>
-
-        <script>
-
-            $("#but").click(function call() {
-                $.ajax({
-                    url: "/sessions/search",
-                    type: "GET",
-                    data: {"filmName": $("#input").val()},
-                    success: function (data) {
-                        // $('#input').val("Sent!");
-                        console.log("Film: " + data);
-                    }
-                });
-            });
-
-        </script>
-
     </div>
+    <div id="main">
+    <script>
+        $("#but").click(function call() {
+            $.ajax({
+                url: "/sessions/search",
+                type: "GET",
+                data: {"filmName": $("#input").val()},
+                success: function (data) {
+                    document.getElementById("main").innerHTML = "";
+                    var sessionsArray = JSON.parse(data);
+                    table = document.createElement("table");
+                    console.log("Film: " + data);
+                    console.log("Found: " + sessionsArray.length);
+                    for (var i = 0; i < sessionsArray.length; i++) {
+                        var trr = table.insertRow();
+                        var tdd3 = trr.insertCell();
+                        var img = new Image(200, 100);
+                        img.src = "/sessions/search/image/" + sessionsArray[i].film.id;
+                        tdd3.appendChild(img);
+                    }
+                    document.getElementById("main").appendChild(table);
+                }
+            });
+        });
+    </script>
+    </div>
+
 </body>
 </html>

@@ -1,16 +1,22 @@
 package edu.school21.cinema.servlets;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import edu.school21.cinema.models.Movie;
 import edu.school21.cinema.models.Session;
 import edu.school21.cinema.models.SessionSearch;
 import edu.school21.cinema.services.HallService;
 import edu.school21.cinema.services.MovieService;
 import edu.school21.cinema.services.SessionService;
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -47,42 +53,23 @@ public class SessionsSearchController {
         return json;
     }
 
+    @GetMapping("/sessions/search/image/{id}")
+    @ResponseBody
+    public byte[] getContent(@PathVariable("id") Long id) {
+        try {
+            Movie movie = movieService.getMovieById(id);
+            Path currentRelativePath = Paths.get("");
+            String s = currentRelativePath.toRealPath().toString();
+            if (movie.getPosterUrl() == null)
+                return FileUtils.readFileToByteArray(new File(s + "/src/main/webapp/images/no-img.jpg"));
+            return FileUtils.readFileToByteArray(new File(movie.getPosterUrl()));
+        } catch (IOException e) {
+            return null;
+        }
+    }
+
     @GetMapping("/sessions")
     public String Sessions() {
         return "sessionsSearch";
     }
-
-//    @GetMapping("/admin/panel/sessions")
-//    public String Sessions(Model model) {
-//        model.addAttribute("sessions", sessionService.listSessions());
-//        model.addAttribute("movies", movieService.listMovies());
-//        model.addAttribute("halls", hallService.listHalls());
-//        return "sessions";
-//    }
-
-//    @GetMapping("/admin/panel/sessions/delete/{id}")
-//    public String deleteSession(@PathVariable("id") Long id) {
-//        sessionService.removeSession(id);
-//        return "redirect:/admin/panel/sessions";
-//    }
-//
-//    @PostMapping("/admin/panel/sessions/update/{id}")
-//    public String updateSession(@PathVariable("id") Long id,
-//                                @ModelAttribute("cost") int cost) {
-//        Session session = sessionService.getSessionById(id);
-//        session.setCost(cost);
-//        sessionService.updateSession(session);
-//        return "redirect:/admin/panel/sessions";
-//    }
-//
-//    @PostMapping("/admin/panel/sessions")
-//    public String addSession(@ModelAttribute("date") String date,
-//                             @ModelAttribute("cost") int cost,
-//                             @ModelAttribute("movie") Long movie_id,
-//                             @ModelAttribute("hall") int hall_id){
-//
-//        sessionService.addSession(new Session(0L,LocalDateTime.parse(date), cost,
-//                movieService.getMovieById(movie_id), hallService.getHallById(hall_id)));
-//        return "redirect:/admin/panel/sessions";
-//    }
 }
