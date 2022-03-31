@@ -35,55 +35,13 @@
         }
 
         table {
-            margin: auto; /* Выравниваем таблицу по центру */
-        }
-        .tables {
-            width: auto;
-            border: none;
             margin: auto;
-            border-collapse: separate;
+            /*width: auto;*/
+            /*border: 1px solid black;*/
+            padding: 3px 5px;
             text-align: center;
         }
-        .tables thead th {
-            font-weight: bold;
-            text-align: center;
-            border: none;
-            padding: 10px 15px;
-            background: #EDEDED;
-            font-size: 14px;
-            border-top: 1px solid #ddd;
-        }
-        .tables tr th:first-child, .table tr td:first-child {
-            border-left: 1px solid #ddd;
-        }
-        .tables tr th:last-child, .table tr td:last-child {
-            border-right: 1px solid #ddd;
-        }
-        .tables thead tr th:first-child {
-            border-radius: 20px 0 0 0;
-        }
-        .tables thead tr th:last-child {
-            border-radius: 0 20px 0 0;
-        }
-        .tables tbody td {
-            text-align: center;
-            border: none;
-            padding: 10px 15px;
-            font-size: 14px;
-            vertical-align: top;
-        }
-        .tables tbody tr:nth-child(even) {
-            background: #F8F8F8;
-        }
-        .tables tbody tr:last-child td{
-            border-bottom: 1px solid #ddd;
-        }
-        .tables tbody tr:last-child td:first-child {
-            border-radius: 0 0 0 20px;
-        }
-        .tables tbody tr:last-child td:last-child {
-            border-radius: 0 0 20px 0;
-        }
+
     </style>
 
     <script
@@ -100,6 +58,8 @@
         <input type="button" value="Find" id="but">
     </form>
     </div>
+    <br>
+    <br>
     <div id="main">
     <script>
         $("#but").click(function call() {
@@ -111,15 +71,39 @@
                     document.getElementById("main").innerHTML = "";
                     var sessionsArray = JSON.parse(data);
                     table = document.createElement("table");
-                    console.log("Film: " + data);
-                    console.log("Found: " + sessionsArray.length);
-                    for (var i = 0; i < sessionsArray.length; i++) {
-                        var trr = table.insertRow();
-                        var tdd3 = trr.insertCell();
-                        var img = new Image(200, 100);
-                        img.src = "/sessions/search/image/" + sessionsArray[i].film.id;
-                        tdd3.appendChild(img);
+
+                    var count = 0;
+                    for (var i = 0 ; i < sessionsArray.length / 3; i++){
+                        var tr = document.createElement('tr');
+
+                        for (var j = 0; j < 3; j++) {
+                            var td = document.createElement('td');
+                            var tr1 = document.createElement('tr');
+                            var tr2 = document.createElement('tr');
+                            var tr3 = document.createElement('tr');
+                            if (count < sessionsArray.length) {
+                                var img = new Image(180, 130);
+                                img.src = "/sessions/search/image/" + sessionsArray[count].film.id;
+                                tr1.appendChild(img);
+                                tr2.appendChild(document.createTextNode(sessionsArray[count].dateTime));
+                                tr3.appendChild(document.createTextNode(sessionsArray[count].film.name));
+                                td.appendChild(tr1);
+                                td.appendChild(tr2);
+                                td.appendChild(tr3);
+                                count++;
+                            }
+                            tr.appendChild(td);
+                        }
+                        table.appendChild(tr);
                     }
+
+                    // for (var i = 0; i < sessionsArray.length; i++) {
+                    //     var trr = table.insertRow();
+                    //     var tdd3 = trr.insertCell();
+                    //     var img = new Image(180, 130);
+                    //     img.src = "/sessions/search/image/" + sessionsArray[i].film.id;
+                    //     tdd3.appendChild(img);
+                    // }
                     document.getElementById("main").appendChild(table);
                 }
             });
@@ -129,3 +113,19 @@
 
 </body>
 </html>
+
+<#--success: function (data) {-->
+<#--document.getElementById("main").innerHTML = "";-->
+<#--var sessionsArray = JSON.parse(data);-->
+<#--table = document.createElement("table");-->
+<#--console.log("Film: " + data);-->
+<#--console.log("Found: " + sessionsArray.length);-->
+<#--for (var i = 0; i < sessionsArray.length; i++) {-->
+<#--var trr = table.insertRow();-->
+<#--var tdd3 = trr.insertCell();-->
+<#--var img = new Image(180, 130);-->
+<#--img.src = "/sessions/search/image/" + sessionsArray[i].film.id;-->
+<#--tdd3.appendChild(img);-->
+<#--}-->
+<#--document.getElementById("main").appendChild(table);-->
+<#--}-->
