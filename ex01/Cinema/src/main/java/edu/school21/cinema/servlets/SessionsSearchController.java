@@ -10,6 +10,7 @@ import edu.school21.cinema.services.SessionService;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.File;
@@ -63,6 +64,12 @@ public class SessionsSearchController {
         } catch (IOException e) {
             return null;
         }
+    }
+
+    @GetMapping("/sessions/{id}")
+    public String MovieInfo(@PathVariable("id") Long id, Model model) {
+        model.addAttribute("session", sessionService.getSessionById(id));
+        return "sessionInfo";
     }
 
     @GetMapping("/sessions")
