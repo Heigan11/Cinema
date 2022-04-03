@@ -86,7 +86,13 @@
                                 img.src = "/sessions/search/image/" + sessionsArray[count].film.id;
                                 tr1.appendChild(img);
                                 tr2.appendChild(document.createTextNode(sessionsArray[count].dateTime));
-                                tr3.appendChild(document.createTextNode(sessionsArray[count].film.name));
+
+                                var e    = document.createElement('a');
+                                e.href = "/sessions/" + sessionsArray[count].id;
+                                e.title = sessionsArray[count].film.name;
+                                e.appendChild(document.createTextNode(sessionsArray[count].film.name));
+                                tr3.appendChild(e);
+
                                 td.appendChild(tr1);
                                 td.appendChild(tr2);
                                 td.appendChild(tr3);
@@ -96,14 +102,6 @@
                         }
                         table.appendChild(tr);
                     }
-
-                    // for (var i = 0; i < sessionsArray.length; i++) {
-                    //     var trr = table.insertRow();
-                    //     var tdd3 = trr.insertCell();
-                    //     var img = new Image(180, 130);
-                    //     img.src = "/sessions/search/image/" + sessionsArray[i].film.id;
-                    //     tdd3.appendChild(img);
-                    // }
                     document.getElementById("main").appendChild(table);
                 }
             });
@@ -113,19 +111,3 @@
 
 </body>
 </html>
-
-<#--success: function (data) {-->
-<#--document.getElementById("main").innerHTML = "";-->
-<#--var sessionsArray = JSON.parse(data);-->
-<#--table = document.createElement("table");-->
-<#--console.log("Film: " + data);-->
-<#--console.log("Found: " + sessionsArray.length);-->
-<#--for (var i = 0; i < sessionsArray.length; i++) {-->
-<#--var trr = table.insertRow();-->
-<#--var tdd3 = trr.insertCell();-->
-<#--var img = new Image(180, 130);-->
-<#--img.src = "/sessions/search/image/" + sessionsArray[i].film.id;-->
-<#--tdd3.appendChild(img);-->
-<#--}-->
-<#--document.getElementById("main").appendChild(table);-->
-<#--}-->

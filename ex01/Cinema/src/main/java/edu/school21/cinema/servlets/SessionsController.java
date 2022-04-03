@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.text.ParseException;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Controller
 public class SessionsController {
@@ -55,11 +57,13 @@ public class SessionsController {
     public String addSession(@ModelAttribute("date") String date,
                              @ModelAttribute("cost") int cost,
                              @ModelAttribute("movie") Long movie_id,
-                             @ModelAttribute("hall") int hall_id){
+                             @ModelAttribute("hall") int hall_id) throws ParseException {
 
-//        sessionService.addSession(new Session(0L,LocalDateTime.parse(date), cost,
-//                movieService.getMovieById(movie_id), hallService.getHallById(hall_id)));
-        sessionService.addSession(new Session(0L,date, cost,
+        LocalDateTime dateTime = LocalDateTime.parse(date);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        String formattedDateTime = dateTime.format(formatter);
+
+        sessionService.addSession(new Session(0L,formattedDateTime, cost,
                 movieService.getMovieById(movie_id), hallService.getHallById(hall_id)));
         return "redirect:/admin/panel/sessions";
     }

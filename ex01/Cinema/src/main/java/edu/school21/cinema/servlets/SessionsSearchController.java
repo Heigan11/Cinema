@@ -10,14 +10,12 @@ import edu.school21.cinema.services.SessionService;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,7 +39,6 @@ public class SessionsSearchController {
     @GetMapping("/sessions/search")
     @ResponseBody
     public String SessionsSearch(@RequestParam("filmName") String filmName) throws JsonProcessingException {
-        System.out.println("filmName = " + filmName);
         List<Session> sessionList = sessionService.getSessionByFilm(filmName);
         List<SessionSearch> sessionSearchList = new ArrayList<>();
         for (Session session : sessionList){
