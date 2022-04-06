@@ -9,5 +9,5 @@ public interface MovieService {
     public void updateMovie(Movie movie);
     public void removeMovie(Long id);
     public Movie getMovieById(Long id);
-    public List<Movie> listMovies();
+    public List<Movie> findAllMovies();
 }

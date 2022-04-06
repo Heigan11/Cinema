@@ -33,7 +33,7 @@ public class SessionsController {
     @GetMapping("/admin/panel/sessions")
     public String Sessions(Model model) {
         model.addAttribute("sessions", sessionService.listSessions());
-        model.addAttribute("movies", movieService.listMovies());
+        model.addAttribute("movies", movieService.findAllMovies());
         model.addAttribute("halls", hallService.listHalls());
         return "sessions";
     }

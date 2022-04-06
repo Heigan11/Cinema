@@ -29,7 +29,7 @@ public class MoviesController {
 
     @GetMapping("/admin/panel/films")
     public String Movies(Model model) {
-        model.addAttribute("movies", movieService.listMovies());
+        model.addAttribute("movies", movieService.findAllMovies());
         return "films";
     }
 

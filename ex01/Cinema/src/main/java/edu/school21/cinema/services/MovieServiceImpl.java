@@ -44,7 +44,7 @@ public class MovieServiceImpl implements MovieService{
 
     @Override
     @Transactional
-    public List<Movie> listMovies() {
-        return this.movieRepository.listMovies() ;
+    public List<Movie> findAllMovies() {
+        return this.movieRepository.findAllMovies() ;
     }
 }

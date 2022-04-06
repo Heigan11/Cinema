@@ -41,7 +41,7 @@ public class MovieRepositoryImpl implements MovieRepository {
     }
 
     @Override
-    public List<Movie> listMovies() {
+    public List<Movie> findAllMovies() {
         return entityManager.createQuery("Select f from Movie as f order by f.id", Movie.class).getResultList();
     }
 }
