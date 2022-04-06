@@ -5,7 +5,8 @@ import edu.school21.cinema.repositories.HallRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
+//import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
@@ -17,20 +18,6 @@ public class HallServiceImpl implements HallService{
     public HallServiceImpl(HallRepository hallRepository) {
         this.hallRepository = hallRepository;
     }
-
-//    @Override
-//    @Transactional
-//    public void addHall(Hall hall) {
-//        if (hall.getSeats() > 0 && hall.getSeats() <= 1000)
-//            this.hallRepository.addHall(hall);
-//    }
-
-//    @Override
-//    @Transactional
-//    public void updateHall(Hall hall) {
-//        if (hall.getSeats() > 0 && hall.getSeats() <= 1000)
-//            this.hallRepository.updateHall(hall);
-//    }
 
     @Override
     @Transactional
@@ -46,13 +33,13 @@ public class HallServiceImpl implements HallService{
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public Hall getHallById(int id) {
         return this.hallRepository.getHallById(id);
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public List<Hall> listHalls() {
         return this.hallRepository.listHalls() ;
     }
