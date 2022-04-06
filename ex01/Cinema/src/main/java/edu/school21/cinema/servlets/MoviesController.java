@@ -58,6 +58,9 @@ public class MoviesController {
     public String addPoster(@RequestParam("file") MultipartFile file,
                             @PathVariable("id") Long id) throws IOException {
 
+        if (movieService.getMovieById(id) == null)
+            return "redirect:/admin/panel/films";
+
         if (file.getContentType().equals("image/png") ||
                 file.getContentType().equals("image/jpeg") ||
                 file.getContentType().equals("image/webp"))
@@ -81,7 +84,6 @@ public class MoviesController {
             movie.setPosterUrl(path.toString());
             movieService.updateMovie(movie);
         }
-
         return "redirect:/admin/panel/films";
     }
 
