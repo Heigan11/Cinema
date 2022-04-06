@@ -4,7 +4,9 @@ import edu.school21.cinema.models.Hall;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.*;
-import javax.transaction.Transactional;
+//import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 
 @Repository
@@ -25,11 +27,17 @@ public class HallRepositoryImpl implements HallRepository {
             entityManager.merge(hall);
     }
 
+//    @Override
+//    public void removeHall(int id) {
+//        Hall hall = entityManager.find(Hall.class, id);
+//        if (hall != null)
+//            entityManager.remove(hall);
+//    }
+
     @Override
     public void removeHall(int id) {
-        Hall hall = entityManager.find(Hall.class, id);
-        if (hall != null)
-            entityManager.remove(hall);
+        Query query = entityManager.createQuery("Delete from Hall c where c.id = :id");
+        query.setParameter("id", id).executeUpdate();
     }
 
     @Override
