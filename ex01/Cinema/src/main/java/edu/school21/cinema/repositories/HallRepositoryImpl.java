@@ -14,17 +14,28 @@ public class HallRepositoryImpl implements HallRepository {
     @PersistenceContext
     private EntityManager entityManager;
 
-    @Override
-    public void addHall(Hall hall) {
-        entityManager.merge(hall);
-    }
+//    @Override
+//    public void addHall(Hall hall) {
+//        entityManager.merge(hall);
+//    }
+//
+//    @Override
+//    public void updateHall(Hall hall) {
+//        Hall temp = entityManager.find(Hall.class, hall.getId());
+//        if (temp != null) {
+//            entityManager.merge(hall);
+//        }
+//    }
 
     @Override
-    public void updateHall(Hall hall) {
-        Hall temp = entityManager.find(Hall.class, hall.getId());
-        if (temp != null) {
+    public void saveHall(Hall hall) {
+        if (hall.getId() != 0) {
+            Hall temp = entityManager.find(Hall.class, hall.getId());
+            if (temp != null) {
+                entityManager.merge(hall);
+            }
+        } else
             entityManager.merge(hall);
-        }
     }
 
     @Override

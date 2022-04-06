@@ -41,14 +41,16 @@ public class HallsController {
     public String updateHall(@ModelAttribute("hall") Hall hall) {
         System.out.println("====" + hall);
         if (hall != null)
-            hallService.updateHall(hall);
+            hallService.saveHall(hall);
+//            hallService.updateHall(hall);
         return "redirect:/admin/panel/halls";
     }
 
     @PostMapping("/admin/panel/halls")
     public String addhall(@ModelAttribute("hall") Hall hall){
         if (hall != null)
-            hallService.addHall(hall);
+            hallService.saveHall(hall);
+//            hallService.addHall(hall);
         return "redirect:/admin/panel/halls";
     }
 }

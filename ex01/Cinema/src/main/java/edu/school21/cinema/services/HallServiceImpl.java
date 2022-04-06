@@ -18,18 +18,25 @@ public class HallServiceImpl implements HallService{
         this.hallRepository = hallRepository;
     }
 
-    @Override
-    @Transactional
-    public void addHall(Hall hall) {
-        if (hall.getSeats() > 0 && hall.getSeats() <= 1000)
-            this.hallRepository.addHall(hall);
-    }
+//    @Override
+//    @Transactional
+//    public void addHall(Hall hall) {
+//        if (hall.getSeats() > 0 && hall.getSeats() <= 1000)
+//            this.hallRepository.addHall(hall);
+//    }
+
+//    @Override
+//    @Transactional
+//    public void updateHall(Hall hall) {
+//        if (hall.getSeats() > 0 && hall.getSeats() <= 1000)
+//            this.hallRepository.updateHall(hall);
+//    }
 
     @Override
     @Transactional
-    public void updateHall(Hall hall) {
+    public void saveHall(Hall hall) {
         if (hall.getSeats() > 0 && hall.getSeats() <= 1000)
-            this.hallRepository.updateHall(hall);
+            this.hallRepository.saveHall(hall);
     }
 
     @Override
