@@ -2,6 +2,7 @@ package edu.school21.cinema.models;
 
 import lombok.*;
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
@@ -19,4 +20,7 @@ public class Hall {
 
     @Column(name = "seats")
     private int seats;
+
+    @OneToMany(mappedBy = "hall", cascade = CascadeType.ALL)
+    private List<Session> sessions;
 }

@@ -3,7 +3,6 @@ package edu.school21.cinema.models;
 import lombok.*;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -25,9 +24,11 @@ public class Session {
     @Column(name = "cost")
     private int cost;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "movie_id", referencedColumnName = "id")
     private Movie movie;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "hall_id", referencedColumnName = "id")
     private Hall hall;
 }

@@ -5,7 +5,8 @@ import edu.school21.cinema.repositories.SessionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
+//import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
@@ -37,18 +38,18 @@ public class SessionServiceImpl implements SessionService{
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public Session getSessionById(Long id) {
         return this.sessionRepository.getSessionById(id);
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public List<Session> listSessions() {
         return this.sessionRepository.listSessions() ;
     } @Override
 
-    @Transactional
+    @Transactional(readOnly = true)
     public List<Session> getSessionByFilm(String filmName) {
         return this.sessionRepository.getSessionByFilm(filmName) ;
     }

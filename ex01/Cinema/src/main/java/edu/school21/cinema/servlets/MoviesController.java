@@ -82,14 +82,14 @@ public class MoviesController {
 
             Movie movie = movieService.getMovieById(id);
             movie.setPosterUrl(path.toString());
-            movieService.updateMovie(movie);
+            movieService.saveMovie(movie);
         }
         return "redirect:/admin/panel/films";
     }
 
     @PostMapping("/admin/panel/films")
     public String addMovie(@ModelAttribute("movie") Movie movie){
-        movieService.addMovie(movie);
+        movieService.saveMovie(movie);
         return "redirect:/admin/panel/films";
     }
 }

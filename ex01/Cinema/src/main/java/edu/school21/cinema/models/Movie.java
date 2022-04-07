@@ -2,6 +2,7 @@ package edu.school21.cinema.models;
 
 import lombok.*;
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
@@ -31,4 +32,7 @@ public class Movie {
 
     @Column(name = "poster")
     private String posterUrl;
+
+    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
+    private List<Session> sessions;
 }

@@ -7,8 +7,9 @@ import java.util.List;
 
 @Repository
 public interface MovieRepository {
-    public void addMovie(Movie movie);
-    public void updateMovie(Movie movie);
+//    public void addMovie(Movie movie);
+//    public void updateMovie(Movie movie);
+    public void saveMovie(Movie movie);
     public void removeMovie(Long id);
     public Movie getMovieById(Long id);
     public List<Movie> findAllMovies();
