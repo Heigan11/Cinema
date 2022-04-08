@@ -1,6 +1,5 @@
 package edu.school21.cinema.models;
 
-import edu.school21.cinema.services.SessionService;
 import lombok.Data;
 
 @Data

@@ -4,7 +4,7 @@ import edu.school21.cinema.models.Session;
 import edu.school21.cinema.services.HallService;
 import edu.school21.cinema.services.MovieService;
 import edu.school21.cinema.services.SessionService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,23 +12,16 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.text.ParseException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+@RequiredArgsConstructor
 @Controller
 public class SessionsController {
 
     private final SessionService sessionService;
     private final MovieService movieService;
     private final HallService hallService;
-
-    @Autowired
-    public SessionsController(SessionService sessionService, MovieService movieService, HallService hallService) {
-        this.sessionService = sessionService;
-        this.movieService = movieService;
-        this.hallService = hallService;
-    }
     
     @GetMapping("/admin/panel/sessions")
     public String Sessions(Model model) {

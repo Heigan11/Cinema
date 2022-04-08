@@ -4,7 +4,6 @@ import edu.school21.cinema.models.Hall;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.*;
-//import javax.transaction.Transactional;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;

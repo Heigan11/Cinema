@@ -1,12 +1,11 @@
 package edu.school21.cinema.repositories;
 
-import edu.school21.cinema.models.Hall;
 import edu.school21.cinema.models.Movie;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Repository
@@ -15,19 +14,6 @@ public class MovieRepositoryImpl implements MovieRepository {
 
     @PersistenceContext
     private EntityManager entityManager;
-
-//    @Override
-//    public void addMovie(Movie movie) {
-//        entityManager.merge(movie);
-//    }
-//
-//    @Override
-//    public void updateMovie(Movie movie) {
-//        Movie temp = entityManager.find(Movie.class, movie.getId());
-//        if (temp != null) {
-//            entityManager.merge(movie);
-//        }
-//    }
 
     @Override
     public void saveMovie(Movie movie) {

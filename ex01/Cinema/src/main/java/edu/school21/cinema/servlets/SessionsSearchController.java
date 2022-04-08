@@ -4,11 +4,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import edu.school21.cinema.models.Movie;
 import edu.school21.cinema.models.Session;
 import edu.school21.cinema.models.SessionSearch;
-import edu.school21.cinema.services.HallService;
 import edu.school21.cinema.services.MovieService;
 import edu.school21.cinema.services.SessionService;
+import lombok.RequiredArgsConstructor;
 import org.apache.commons.io.FileUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -23,19 +22,12 @@ import java.util.List;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 
+@RequiredArgsConstructor
 @Controller
 public class SessionsSearchController {
 
     private final SessionService sessionService;
     private final MovieService movieService;
-    private final HallService hallService;
-
-    @Autowired
-    public SessionsSearchController(SessionService sessionService, MovieService movieService, HallService hallService) {
-        this.sessionService = sessionService;
-        this.movieService = movieService;
-        this.hallService = hallService;
-    }
 
     @GetMapping("/sessions/search")
     @ResponseBody

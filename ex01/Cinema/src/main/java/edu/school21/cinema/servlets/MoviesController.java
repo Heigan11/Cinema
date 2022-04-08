@@ -2,30 +2,23 @@ package edu.school21.cinema.servlets;
 
 import edu.school21.cinema.models.Movie;
 import edu.school21.cinema.services.MovieService;
+import lombok.RequiredArgsConstructor;
 import org.apache.commons.io.FileUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
 
+@RequiredArgsConstructor
 @Controller
 public class MoviesController {
 
     private final MovieService movieService;
-
-    @Autowired
-    public MoviesController(MovieService movieService) {
-        this.movieService = movieService;
-    }
 
     @GetMapping("/admin/panel/films")
     public String Movies(Model model) {
