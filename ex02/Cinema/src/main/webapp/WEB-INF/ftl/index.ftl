@@ -21,8 +21,8 @@
                 stompClient.connect({}, function(frame) {
                     setConnected(true);
                     console.log('Connected: ' + frame);
-                    stompClient.subscribe('/topic/public', function(messageOutput) {
-                        showMessageOutput(JSON.parse(messageOutput.body));
+                    stompClient.subscribe('/topic/public', function(message) {
+                        showMessageOutput(JSON.parse(message.body));
                     });
                 });
             }
@@ -36,10 +36,16 @@
             }
 
             function sendMessage() {
-                var from = document.getElementById('from').value;
-                var text = document.getElementById('text').value;
-                stompClient.send("/app/chat.sendMessage", {},
-                    JSON.stringify({'from':from, 'text':text}));
+                // var from = document.getElementById('from').value;
+                // var text = document.getElementById('text').value;
+                // stompClient.send("/app/chat.sendMessage", {},
+                //     JSON.stringify({'from':from, 'text':text}));
+
+                var message = {
+                    from: document.getElementById('from').value,
+                    text: document.getElementById('text').value
+                };
+                stompClient.send("/app/chat.sendMessage", {}, JSON.stringify(message));
             }
 
             function showMessageOutput(messageOutput) {
