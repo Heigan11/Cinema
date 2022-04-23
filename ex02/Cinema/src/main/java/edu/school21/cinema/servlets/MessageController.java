@@ -3,6 +3,7 @@ package edu.school21.cinema.servlets;
 import edu.school21.cinema.models.Message;
 import edu.school21.cinema.models.OutputMessage;
 import edu.school21.cinema.services.HallService;
+import edu.school21.cinema.services.MessageService;
 import edu.school21.cinema.services.MovieService;
 import edu.school21.cinema.services.SessionService;
 import lombok.RequiredArgsConstructor;
@@ -18,25 +19,17 @@ import java.util.Date;
 @Controller
 public class MessageController {
 
-//    private final SessionService sessionService;
-//    private final MovieService movieService;
-//    private final HallService hallService;
+    private final SessionService sessionService;
+    private final MovieService movieService;
+    private final HallService hallService;
+//    private final MessageService messageService;
 
-//    @MessageMapping("/chat.sendMessage")
-//    @SendTo("/topic/public")
-//    public OutputMessage send(@Payload Message message) {
-//        System.out.println("IN Send");
-//        String time = new SimpleDateFormat("HH:mm").format(new Date());
-//        OutputMessage outputMessage = new OutputMessage(message.getFrom(), message.getText(), time);
-//        System.out.println("Message: " + outputMessage);
-//        return outputMessage;
-//    }
-
-    @MessageMapping("/chat.sendMessage")
+    @MessageMapping("/chat")
     @SendTo("/topic/public")
-    public Message sendMessage(@Payload Message message) {
-        System.out.println("Message: " + message);
-        message.setText("HELLO!");
-        return message;
+    public OutputMessage send(@Payload Message message) {
+        String time = new SimpleDateFormat("HH:mm").format(new Date());
+        OutputMessage outputMessage = new OutputMessage(message.getFrom(), message.getText(), time);
+        System.out.println("Message: " + outputMessage);
+        return outputMessage;
     }
 }

@@ -18,18 +18,6 @@ public class MovieServiceImpl implements MovieService{
         this.movieRepository = movieRepository;
     }
 
-//    @Override
-//    @Transactional
-//    public void addMovie(Movie movie) {
-//        this.movieRepository.addMovie(movie);
-//    }
-//
-//    @Override
-//    @Transactional
-//    public void updateMovie(Movie movie) {
-//        this.movieRepository.updateMovie(movie);
-//    }
-
     @Override
     @Transactional
     public void saveMovie(Movie movie) {

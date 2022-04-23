@@ -2,6 +2,8 @@ package edu.school21.cinema.models;
 
 import lombok.*;
 
+import javax.persistence.*;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -9,6 +11,8 @@ import lombok.*;
 @ToString
 public class Message {
 
+
     private String from;
     private String text;
+
 }

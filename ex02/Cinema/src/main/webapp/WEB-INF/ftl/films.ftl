@@ -100,6 +100,7 @@
                 <th>Description</th>
                 <th>Poster</th>
                 <th>Add poster</th>
+                <th>Chat</th>
                 <th>Delete</th>
             </tr>
             </thead>
@@ -121,13 +122,12 @@
                     <button type="submit">Upload</button>
                 </form>
                 </td>
-                <td><a href="/admin/panel/films/delete/${movie.id}">delete</a></td>-->
-<#--                <td>-->
-<#--                    <form method="post" action="/admin/panel/halls/update/${hall.id}" name="hall">-->
-<#--                        <input title="Number of seats" placeholder="Seats" type="text" name="seats" size="4" required pattern="^[ 0-9]+$">-->
-<#--                        <button type="submit">Update</button>-->
-<#--                    </form>-->
-<#--                </td>-->
+                <td>
+                    <a href="/films/${movie.id}/chat">Chat</a>
+                </td>
+                <td>
+                    <a href="/admin/panel/films/delete/${movie.id}">delete</a>
+                </td>
             </tr>
             </#list>
         </tbody>

@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -85,4 +86,21 @@ public class MoviesController {
         movieService.saveMovie(movie);
         return "redirect:/admin/panel/films";
     }
+
+    @GetMapping("/films/{id}/chat")
+    public String goChat(@PathVariable("id") Long id, Model model, HttpServletRequest request) {
+        model.addAttribute("movie", movieService.getMovieById(id));
+        return "chat";
+//        try {
+//            if (movieService.getMovieById(Long.parseLong(id)) != null) {
+//                model.addAttribute("movie", movieService.getMovieById(Long.parseLong(id)));
+//                model.addAttribute("cinemausername", request.getUserPrincipal().getName());
+//                return "/chat/chat";
+//            }
+//            return "redirect:/";
+//        } catch (Exception e) {
+//            return "redirect:/";
+//        }
+    }
+
 }
