@@ -36,6 +36,6 @@ public class Movie {
     @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
     private List<Session> sessions;
 
-//    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
-//    private List<Message> messages;
+    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
+    private List<Message> messages;
 }

@@ -22,14 +22,18 @@ public class MessageController {
     private final SessionService sessionService;
     private final MovieService movieService;
     private final HallService hallService;
-//    private final MessageService messageService;
+    private final MessageService messageService;
 
     @MessageMapping("/chat")
     @SendTo("/topic/public")
-    public OutputMessage send(@Payload Message message) {
-        String time = new SimpleDateFormat("HH:mm").format(new Date());
-        OutputMessage outputMessage = new OutputMessage(message.getFrom(), message.getText(), time);
-        System.out.println("Message: " + outputMessage);
-        return outputMessage;
+    public Message send(@Payload Message message) {
+//    public OutputMessage send(@Payload Message message) {
+        System.out.println("Message received: " + message);
+        messageService.saveMessage(message);
+        return message;
+//        String time = new SimpleDateFormat("HH:mm").format(new Date());
+//        OutputMessage outputMessage = new OutputMessage(message.getSender(), message.getText(), time);
+//        System.out.println("Message new: " + outputMessage);
+//        return outputMessage;
     }
 }

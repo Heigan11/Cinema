@@ -54,18 +54,19 @@
 
             function sendMessage() {
                 var message = {
-                    from: document.getElementById('from').value,
-                    text: document.getElementById('text').value
+                    sender: document.getElementById('sender').value,
+                    text: document.getElementById('text').value,
+                    movie: { id: ${movie.id}}
                 };
                 stompClient.send("/app/chat", {}, JSON.stringify(message));
             }
 
-            function showMessageOutput(messageOutput) {
+            function showMessageOutput(message) {
                 var response = document.getElementById('response');
                 var p = document.createElement('p');
                 p.style.wordWrap = 'break-word';
-                p.appendChild(document.createTextNode(messageOutput.from + ": "
-                    + messageOutput.text + " (" + messageOutput.time + ")"));
+                p.appendChild(document.createTextNode(message.sender + ": "
+                    + message.text));
                 response.appendChild(p);
             }
         </script>
@@ -74,7 +75,7 @@
 <div>
     <a> ${movie.title}'s CHAT </a>
     <div>
-        <input type="text" id="from" placeholder="Choose a nickname"/>
+        <input type="text" id="sender" placeholder="Choose a nickname"/>
     </div>
     <br />
     <div>
@@ -83,10 +84,15 @@
             Disconnect
         </button>
     </div>
-    <br />
+    <br/>
     <div id="conversationDiv">
         <input type="text" id="text" placeholder="Write a message..."/>
         <button id="sendMessage" onclick="sendMessage();">Send</button>
+        <br/>
+        <#list history as message>
+            ${message.sender}: ${message.text}
+            <br/>
+        </#list>
         <p id="response"></p>
     </div>
 </div>

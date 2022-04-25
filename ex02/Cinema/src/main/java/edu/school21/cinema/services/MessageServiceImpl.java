@@ -11,34 +11,40 @@ import java.util.List;
 @Service
 public class MessageServiceImpl implements MessageService{
 
-//    private final MessageRepository messageRepository;
-//
-//    @Autowired
-//    public MessageServiceImpl(MessageRepository messageRepository) {
-//        this.messageRepository = messageRepository;
-//    }
-//
-//    @Override
-//    @Transactional
-//    public void saveMessage(Message message) {
-//            this.messageRepository.saveMessage(message);
-//    }
-//
-//    @Override
-//    @Transactional
-//    public void removeMessage(int id) {
-//        this.messageRepository.removeMessage(id);
-//    }
-//
-//    @Override
-//    @Transactional(readOnly = true)
-//    public Message getMessageById(int id) {
-//        return this.messageRepository.getMessageById(id);
-//    }
-//
-//    @Override
-//    @Transactional(readOnly = true)
-//    public List<Message> listMessages() {
-//        return this.messageRepository.listMessages() ;
-//    }
+    private final MessageRepository messageRepository;
+
+    @Autowired
+    public MessageServiceImpl(MessageRepository messageRepository) {
+        this.messageRepository = messageRepository;
+    }
+
+    @Override
+    @Transactional
+    public void saveMessage(Message message) {
+            this.messageRepository.saveMessage(message);
+    }
+
+    @Override
+    @Transactional
+    public void removeMessage(Long id) {
+        this.messageRepository.removeMessage(id);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Message getMessageById(Long id) {
+        return this.messageRepository.getMessageById(id);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Message> listMessages() {
+        return this.messageRepository.listMessages();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Message> getChatHistory(Long id) {
+        return this.messageRepository.getChatHistory(id);
+    }
 }

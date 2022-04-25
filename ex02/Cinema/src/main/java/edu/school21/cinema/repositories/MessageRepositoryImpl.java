@@ -12,34 +12,50 @@ import java.util.List;
 @Transactional
 public class MessageRepositoryImpl implements MessageRepository {
 
-//    @PersistenceContext
-//    private EntityManager entityManager;
-//
+    @PersistenceContext
+    private EntityManager entityManager;
+
+    @Override
+    public void saveMessage(Message message) {
+        if (message.getId() != null) {
+            System.out.println("Update message : " + message);
+            Message temp = entityManager.find(Message.class, message.getId());
+            if (temp != null) {
+                entityManager.merge(message);
+            }
+        } else {
+            System.out.println("New message before merge: " + message);
+            entityManager.merge(message);
+        }
+    }
+
+    @Override
+    public void removeMessage(Long id) {
+        Message message = entityManager.find(Message.class, id);
+        if (message != null)
+            entityManager.remove(message);
+    }
+
+    @Override
+    public Message getMessageById(Long id) {
+        return entityManager.find(Message.class, id);
+    }
+
+    @Override
+    public List<Message> listMessages() {
+        return entityManager.createQuery("Select f from Message as f order by f.id", Message.class).getResultList();
+    }
+
+    @Override
+    public List<Message> getChatHistory(Long id){
+        return entityManager.createQuery("Select f from Message f WHERE f.movie.id = :movieId", Message.class)
+                .setParameter("movieId", id)
+                .setMaxResults(20)
+                .getResultList();
+    }
+
 //    @Override
-//    public void saveMessage(Message message) {
-//        if (message.getId() != 0) {
-//            Message temp = entityManager.find(Message.class, message.getId());
-//            if (temp != null) {
-//                entityManager.merge(message);
-//            }
-//        } else
-//            entityManager.merge(message);
-//    }
-//
-//    @Override
-//    public void removeMessage(int id) {
-//        Message message = entityManager.find(Message.class, id);
-//        if (message != null)
-//            entityManager.remove(message);
-//    }
-//
-//    @Override
-//    public Message getMessageById(int id) {
-//        return entityManager.find(Message.class, id);
-//    }
-//
-//    @Override
-//    public List<Message> listMessages() {
+//    public List<Message> getChatHistory(Long id){
 //        return entityManager.createQuery("Select f from Message as f order by f.id", Message.class).getResultList();
 //    }
 }

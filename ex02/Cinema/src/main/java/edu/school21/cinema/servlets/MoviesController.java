@@ -1,6 +1,7 @@
 package edu.school21.cinema.servlets;
 
 import edu.school21.cinema.models.Movie;
+import edu.school21.cinema.services.MessageService;
 import edu.school21.cinema.services.MovieService;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.io.FileUtils;
@@ -20,6 +21,7 @@ import java.nio.file.Paths;
 public class MoviesController {
 
     private final MovieService movieService;
+    private final MessageService messageService;
 
     @GetMapping("/admin/panel/films")
     public String Movies(Model model) {
@@ -90,6 +92,7 @@ public class MoviesController {
     @GetMapping("/films/{id}/chat")
     public String goChat(@PathVariable("id") Long id, Model model, HttpServletRequest request) {
         model.addAttribute("movie", movieService.getMovieById(id));
+        model.addAttribute("history", messageService.getChatHistory(id));
         return "chat";
 //        try {
 //            if (movieService.getMovieById(Long.parseLong(id)) != null) {
