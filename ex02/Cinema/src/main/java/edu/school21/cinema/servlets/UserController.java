@@ -12,6 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @RequiredArgsConstructor
@@ -33,7 +35,22 @@ public class UserController {
         String tempPassword = user.getPassword();
         user.setPassword(passwordEncoder.encode(tempPassword));
         userService.saveUser(user);
-        return "redirect:/signUp";
+        return "redirect:/admin/panel/films";
     }
 
+    @GetMapping("/signIn")
+    public String getSignInPage() {
+        return "signIn";
+    }
+
+    @PostMapping("/signIn")
+    public String loginUser(@ModelAttribute("user") User user, HttpServletRequest req) {
+        if (userService.isUser(user)) {
+            System.out.println("LOGIN USER: " + user);
+            HttpSession session = req.getSession();
+            session.setAttribute("user", userService.getUserByName(user.getName()).get(0));
+            return "redirect:/admin/panel/films";
+        }
+        return "redirect:/signIn";
+    }
 }

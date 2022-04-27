@@ -89,21 +89,16 @@ public class MoviesController {
         return "redirect:/admin/panel/films";
     }
 
+    @GetMapping ("/entrance")
+    public String entrance() {
+        return "entrance";
+    }
+
     @GetMapping("/films/{id}/chat")
     public String goChat(@PathVariable("id") Long id, Model model, HttpServletRequest request) {
         model.addAttribute("movie", movieService.getMovieById(id));
         model.addAttribute("history", messageService.getChatHistory(id));
         return "chat";
-//        try {
-//            if (movieService.getMovieById(Long.parseLong(id)) != null) {
-//                model.addAttribute("movie", movieService.getMovieById(Long.parseLong(id)));
-//                model.addAttribute("cinemausername", request.getUserPrincipal().getName());
-//                return "/chat/chat";
-//            }
-//            return "redirect:/";
-//        } catch (Exception e) {
-//            return "redirect:/";
-//        }
     }
 
 }

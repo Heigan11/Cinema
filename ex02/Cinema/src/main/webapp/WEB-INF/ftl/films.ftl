@@ -124,6 +124,7 @@
                 </td>
                 <td>
                     <a href="/films/${movie.id}/chat">Chat</a>
+<#--                    <a href="/entrance">Chat</a>-->
                 </td>
                 <td>
                     <a href="/admin/panel/films/delete/${movie.id}">delete</a>
@@ -145,18 +146,3 @@
     </div>
 </body>
 </html>
-
-<#--<div class="addMovies">-->
-<#--    <form:form method="post" action="/admin/films" enctype="multipart/form-data" modelAttribute="movie">-->
-<#--        <form:label cssStyle="background-color: darkgray" path="title">Название</form:label>-->
-<#--        <form:input path="title"></form:input>-->
-<#--        <form:label cssStyle="background-color: darkgray" path="dateOfRelease">Дата выпуска</form:label>-->
-<#--        <input type="date" pattern="yyyy-MM-dd" name="releaseDate" required>-->
-<#--        <form:label cssStyle="background-color: darkgray" path="restrictions">Ограничения по возрасту</form:label>-->
-<#--        <form:input path="restrictions"></form:input>-->
-<#--        <form:label cssStyle="background-color: darkgray" path="description">Описание</form:label>-->
-<#--        <form:input path="description"></form:input>-->
-<#--        <input type="file" name="file" accept="image/*" style="background-color: darkgrey">-->
-<#--        <button type="submit">Добавить</button>-->
-<#--    </form:form>-->
-<#--</div>-->

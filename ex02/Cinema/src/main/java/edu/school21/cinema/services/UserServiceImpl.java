@@ -4,6 +4,7 @@ import edu.school21.cinema.models.User;
 import edu.school21.cinema.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,11 +15,7 @@ import java.util.List;
 public class UserServiceImpl implements UserService{
 
     private final UserRepository userRepository;
-
-//    @Autowired
-//    public UserServiceImpl(UserRepository userRepository) {
-//        this.userRepository = userRepository;
-//    }
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     @Transactional
@@ -36,5 +33,15 @@ public class UserServiceImpl implements UserService{
     @Transactional(readOnly = true)
     public List<User> getUserByName(String name) {
         return this.userRepository.getUserByName(name);
+    }
+
+    @Override
+    public boolean isUser(User user) {
+        if (user != null && user.getName() != null && user.getPassword() != null) {
+            List<User> users = getUserByName(user.getName());
+            if (users != null && users.size() == 1)
+                return passwordEncoder.matches(user.getPassword(), users.get(0).getPassword());
+        }
+        return false;
     }
 }
