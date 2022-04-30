@@ -48,7 +48,7 @@ public class MessageRepositoryImpl implements MessageRepository {
 
     @Override
     public List<Message> getChatHistory(Long id){
-        return entityManager.createQuery("Select f from Message f WHERE f.movie.id = :movieId", Message.class)
+        return entityManager.createQuery("Select f from Message f WHERE f.movie.id = :movieId order by f.id DESC", Message.class)
                 .setParameter("movieId", id)
                 .setMaxResults(20)
                 .getResultList();

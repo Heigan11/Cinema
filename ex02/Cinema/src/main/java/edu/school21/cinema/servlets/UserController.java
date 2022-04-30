@@ -24,33 +24,41 @@ public class UserController {
     private final UserService userService;
 
 
-    @GetMapping("/signUp")
-    public String getSignUpPage() {
+    @GetMapping("/signUp/{id}")
+    public String getSignUpPage(@PathVariable("id") Long id, Model model) {
+        model.addAttribute("film_id", id);
         return "signUp";
     }
 
-    @PostMapping("/signUp")
-    public String registerUser(@ModelAttribute("user") User user) {
+    @PostMapping("/signUp/{film_id}")
+    public String registerUser(@ModelAttribute("user") User user,@PathVariable("film_id") Long film_id, HttpServletRequest req) {
 
         String tempPassword = user.getPassword();
         user.setPassword(passwordEncoder.encode(tempPassword));
         userService.saveUser(user);
         return "redirect:/admin/panel/films";
+//        if (userService.isUser(user)) {
+//            HttpSession session = req.getSession();
+//            session.setAttribute("user", userService.getUserByName(user.getName()).get(0));
+//            return "redirect:/films/" + film_id + "/chat";
+//        }
+//        return "redirect:/signUp/" + film_id;
     }
 
-    @GetMapping("/signIn")
-    public String getSignInPage() {
+    @GetMapping("/signIn/{id}")
+    public String getSignInPage(@PathVariable("id") Long id, Model model) {
+        model.addAttribute("id", id);
         return "signIn";
     }
 
-    @PostMapping("/signIn")
-    public String loginUser(@ModelAttribute("user") User user, HttpServletRequest req) {
+    @PostMapping("/signIn/{id}")
+    public String loginUser(@ModelAttribute("user") User user, @PathVariable("id") Long id, HttpServletRequest req) {
         if (userService.isUser(user)) {
-            System.out.println("LOGIN USER: " + user);
             HttpSession session = req.getSession();
             session.setAttribute("user", userService.getUserByName(user.getName()).get(0));
-            return "redirect:/admin/panel/films";
+//            return "redirect:/admin/panel/films";
+            return "redirect:/films/" + id + "/chat";
         }
-        return "redirect:/signIn";
+        return "redirect:/signIn/" + id;
     }
 }

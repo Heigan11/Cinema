@@ -54,7 +54,7 @@
 
             function sendMessage() {
                 var message = {
-                    sender: document.getElementById('sender').value,
+                    sender: "${user.name}",
                     text: document.getElementById('text').value,
                     movie: { id: ${movie.id}}
                 };
@@ -69,20 +69,23 @@
                     + message.text));
                 response.appendChild(p);
             }
+
+            // disconnect();
+            // connect();
+
         </script>
 </head>
 <body onload="disconnect()">
 <div>
     <a> ${movie.title}'s CHAT </a>
-    <div>
-        <input type="text" id="sender" placeholder="Choose a nickname"/>
-    </div>
     <br />
     <div>
+
         <button id="connect" onclick="connect();">Connect</button>
         <button id="disconnect" disabled="disabled" onclick="disconnect();">
             Disconnect
         </button>
+
     </div>
     <br/>
     <div id="conversationDiv">

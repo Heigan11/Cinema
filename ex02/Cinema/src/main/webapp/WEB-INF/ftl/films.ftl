@@ -127,7 +127,8 @@
                         <a href="/films/${movie.id}/chat">Chat</a>
                     </#if>
                     <#if !Session.user??>
-                        <a href="/entrance">Chat</a>
+<#--                        <a href="/entrance">Chat</a>-->
+                        <a href="/entrance/${movie.id}">Chat</a>
                     </#if>
                 </td>
                 <td>

@@ -1,8 +1,10 @@
 package edu.school21.cinema.servlets;
 
 import edu.school21.cinema.models.Movie;
+import edu.school21.cinema.models.User;
 import edu.school21.cinema.services.MessageService;
 import edu.school21.cinema.services.MovieService;
+import edu.school21.cinema.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Controller;
@@ -23,6 +25,7 @@ public class MoviesController {
 
     private final MovieService movieService;
     private final MessageService messageService;
+    private final UserService userService;
 
     @GetMapping("/admin/panel/films")
     public String Movies(Model model) {
@@ -90,8 +93,9 @@ public class MoviesController {
         return "redirect:/admin/panel/films";
     }
 
-    @GetMapping ("/entrance")
-    public String entrance() {
+    @GetMapping ("/entrance/{id}")
+    public String entrance(@PathVariable("id") Long id, Model model) {
+        model.addAttribute("id", id);
         return "entrance";
     }
 
@@ -102,6 +106,7 @@ public class MoviesController {
 //            return "redirect:/admin/panel/films";
         }
         model.addAttribute("movie", movieService.getMovieById(id));
+        model.addAttribute("user", (User) req.getSession().getAttribute("user"));
         model.addAttribute("history", messageService.getChatHistory(id));
         return "chat";
     }

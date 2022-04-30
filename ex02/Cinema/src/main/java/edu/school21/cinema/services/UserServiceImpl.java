@@ -36,6 +36,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    @Transactional(readOnly = true)
     public boolean isUser(User user) {
         if (user != null && user.getName() != null && user.getPassword() != null) {
             List<User> users = getUserByName(user.getName());

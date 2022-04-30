@@ -66,7 +66,7 @@
 </head>
 
 <body>
-<form action="/signIn" method="post">
+<form action="/signIn/${id}" method="post">
     <ul>
         <li>
             <label for="name">Name:</label>

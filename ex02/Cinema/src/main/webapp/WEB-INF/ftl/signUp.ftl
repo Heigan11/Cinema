@@ -55,7 +55,7 @@
 </head>
 
 <body>
-<form action="/signUp" method="post">
+<form action="/signUp/${film_id}" method="post">
     <ul>
         <li>
             <label for="name">Name:</label>
