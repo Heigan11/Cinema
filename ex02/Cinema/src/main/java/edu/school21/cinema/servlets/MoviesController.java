@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -95,10 +96,13 @@ public class MoviesController {
     }
 
     @GetMapping("/films/{id}/chat")
-    public String goChat(@PathVariable("id") Long id, Model model, HttpServletRequest request) {
+    public String goChat(@PathVariable("id") Long id, Model model, HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        if (req.getSession().getAttribute("user") == null) {
+            resp.sendError(HttpServletResponse.SC_FORBIDDEN);
+//            return "redirect:/admin/panel/films";
+        }
         model.addAttribute("movie", movieService.getMovieById(id));
         model.addAttribute("history", messageService.getChatHistory(id));
         return "chat";
     }
-
 }

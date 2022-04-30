@@ -123,8 +123,12 @@
                 </form>
                 </td>
                 <td>
-                    <a href="/films/${movie.id}/chat">Chat</a>
-<#--                    <a href="/entrance">Chat</a>-->
+                    <#if Session.user??>
+                        <a href="/films/${movie.id}/chat">Chat</a>
+                    </#if>
+                    <#if !Session.user??>
+                        <a href="/entrance">Chat</a>
+                    </#if>
                 </td>
                 <td>
                     <a href="/admin/panel/films/delete/${movie.id}">delete</a>
