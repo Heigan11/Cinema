@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.Collections;
 import java.util.List;
 
 @Repository
@@ -47,11 +48,13 @@ public class MessageRepositoryImpl implements MessageRepository {
     }
 
     @Override
-    public List<Message> getChatHistory(Long id){
-        return entityManager.createQuery("Select f from Message f WHERE f.movie.id = :movieId order by f.id DESC", Message.class)
+    public List<Message> getChatHistory(Long id) {
+        List<Message> messageList = entityManager.createQuery("Select f from Message f WHERE f.movie.id = :movieId order by f.id DESC", Message.class)
                 .setParameter("movieId", id)
                 .setMaxResults(20)
                 .getResultList();
+        Collections.reverse(messageList);
+        return messageList;
     }
 
 //    @Override

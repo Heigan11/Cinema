@@ -1,5 +1,6 @@
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
     <head>
         <style>
             a {
@@ -73,11 +74,37 @@
             }
 
             div.chat {
-                height: 30%;
+                height: 50%;
                 overflow-x: auto;
-                width: 50%;
-                margin-left: 30%;
+                width: 30%;
+                margin: auto;
+                /*margin-left: 33%;*/
             }
+
+            input {
+                font: 1em sans-serif;
+                width: 300px;
+                box-sizing: border-box;
+                border: 1px solid #999;
+            }
+
+            input:focus {
+                border-color: #000;
+            }
+
+            button {
+                padding: 10px 0;
+                border-width: 0;
+                /*display: block;*/
+                width: 120px;
+                margin: 25px auto 0;
+                background: #60e6c5;
+                color: black;
+                font-size: 14px;
+                /*outline: none;*/
+                text-transform: uppercase;
+            }
+
         </style>
         <title>Chat WebSocket</title>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.0/sockjs.js"></script>
@@ -102,8 +129,6 @@
                     stompClient.subscribe('/topic/public', function(message) {
                         showMessageOutput(JSON.parse(message.body));
                     });
-                    <#--var historyMessage = ${history.get(0)};-->
-                    <#--printMessage(${history.get(0)});-->
                 });
             }
 
@@ -124,22 +149,36 @@
                 stompClient.send("/app/chat", {}, JSON.stringify(message));
             }
 
-            function printMessage(historyMessage) {
-                var message = {
-                    sender: historyMessage.sender,
-                    text: historyMessage.text,
-                    movie: { id: ${movie.id}}
-                };
-                stompClient.send("/app/chat", {}, JSON.stringify(message));
+            function printHistory(messageSender, messageText) {
+
+                var messageElement = document.createElement('div');
+                messageElement.className = 'bubbleWrapper';
+
+                var container = document.createElement('div');
+                if (messageSender === "${user.name}")
+                    container.className = 'inlineContainer own';
+                else
+                    container.className = 'inlineContainer';
+
+                var usernameText = document.createElement('label');
+                usernameText.textContent = messageSender;
+                if (messageSender === "${user.name}")
+                    usernameText.hidden = true;
+
+                var textElement = document.createElement('div');
+                if (messageSender === "${user.name}")
+                    textElement.className = 'ownBubble own';
+                else
+                    textElement.className = 'otherBubble other';
+
+                textElement.textContent = messageText;
+                messageArea.appendChild(messageElement);
+                messageElement.appendChild(container);
+                container.appendChild(usernameText);
+                container.appendChild(textElement);
             }
 
             function showMessageOutput(message) {
-                // var response = document.getElementById('response');
-                // var p = document.createElement('p');
-                // p.style.wordWrap = 'break-word';
-                // p.appendChild(document.createTextNode(message.sender + ": "
-                //     + message.text));
-                // response.appendChild(p);
 
                 var messageElement = document.createElement('div');
                 messageElement.className = 'bubbleWrapper';
@@ -174,26 +213,22 @@
     <a> ${movie.title}'s CHAT </a>
     <br />
     <div>
-
         <button id="connect" onclick="connect();">Connect</button>
         <button id="disconnect" disabled="disabled" onclick="disconnect();">
             Disconnect
         </button>
-
     </div>
     <br/>
-    <div id="chat-page" class="chat" style="background-color: #9E9C9C">
-        <div id="messageArea">
-<#--            <#list history as message>-->
-<#--                <script>-->
-<#--                    printMessage(${message});-->
-<#--                </script>-->
-<#--                ${message.sender}: ${message.text}-->
-<#--                <br/>-->
-<#--            </#list>-->
-        </div>
-    </div>
     <div id="conversationDiv">
+        <div id="chat-page" class="chat" style="background-color: #9E9C9C">
+            <div id="messageArea"> </div>
+        </div>
+        <#list history as message>
+        <script>
+            printHistory("${message.sender}", "${message.text}");
+        </script>
+        </#list>
+        <br/>
         <input type="text" id="text" placeholder="Write a message..."/>
         <button id="sendMessage" onclick="sendMessage();">Send</button>
         <br/>
@@ -202,3 +237,4 @@
 </div>
 </body>
 </html>
+
