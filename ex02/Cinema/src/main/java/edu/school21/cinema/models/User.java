@@ -24,10 +24,6 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    @Column(name = "avatar")
-    private String avatarUrl;
-
-    @Column(name = "avatar_name")
-    private String avatarName;
-
+    @Column(name = "avatar_id")
+    private Long avatarId;
 }

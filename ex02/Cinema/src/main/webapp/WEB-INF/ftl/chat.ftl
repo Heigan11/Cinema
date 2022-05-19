@@ -217,6 +217,7 @@
         <button id="disconnect" disabled="disabled" onclick="disconnect();">
             Disconnect
         </button>
+        <button id="profile" onclick="location.href='/admin/panel/profile'">Profile</button>
     </div>
     <br/>
     <div id="conversationDiv">

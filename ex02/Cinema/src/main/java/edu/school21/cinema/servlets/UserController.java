@@ -36,6 +36,9 @@ public class UserController {
         String tempPassword = user.getPassword();
         user.setPassword(passwordEncoder.encode(tempPassword));
         userService.saveUser(user);
+
+        //TODO set default avatar to new user
+
         return "redirect:/admin/panel/films";
 //        if (userService.isUser(user)) {
 //            HttpSession session = req.getSession();
@@ -56,6 +59,9 @@ public class UserController {
         if (userService.isUser(user)) {
             HttpSession session = req.getSession();
             session.setAttribute("user", userService.getUserByName(user.getName()).get(0));
+
+            //TODO save new userSession
+
 //            return "redirect:/admin/panel/films";
             return "redirect:/films/" + id + "/chat";
         }
