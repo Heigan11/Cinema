@@ -103,7 +103,7 @@ public class MoviesController {
     public String goChat(@PathVariable("id") Long id, Model model, HttpServletRequest req, HttpServletResponse resp) throws IOException {
         if (req.getSession().getAttribute("user") == null) {
             resp.sendError(HttpServletResponse.SC_FORBIDDEN);
-//            return "redirect:/admin/panel/films";
+            return "entrance";
         }
         model.addAttribute("movie", movieService.getMovieById(id));
         model.addAttribute("user", (User) req.getSession().getAttribute("user"));
