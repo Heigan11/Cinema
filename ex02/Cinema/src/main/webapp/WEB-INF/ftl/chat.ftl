@@ -210,17 +210,17 @@
         </script>
 </head>
 <body onload="disconnect()">
-<div class="w3-panel" style="display:flex;flex-direction: column;justify-content: center; align-items: center;">
-    <div class="a">
+<div class="w3-panel" style="display:flex;flex-direction: column;justify-content: center; align-items: center; padding: 10px; margin: 10px;">
+    <div class="a" style="padding: 10px; margin: 10px;">
         ${movie.title}'s CHAT
     </div>
-    <div>
+    <div style="padding: 10px; margin: 10px;">
         <button id="connect" onclick="connect();">Connect</button>
         <button id="disconnect" disabled="disabled" onclick="disconnect();">
             Disconnect
         </button>
     </div>
-    <div id="conversationDiv" style="display:flex;flex-direction: column;justify-content: center; align-items: center;">
+    <div id="conversationDiv" style="display:flex;flex-direction: column;justify-content: center; align-items: center; padding: 10px; margin: 10px;">
         <div id="chat-page" class="chat" style="background-color: #9E9C9C; width: 100%;">
             <div id="messageArea" style="width: 100%;"> </div>
         </div>
@@ -230,7 +230,7 @@
         </script>
         </#list>
         <br/>
-        <div>
+        <div style="padding: 10px; margin: 10px;">
             <input type="text" id="text" placeholder="Write a message..."/>
             <button id="sendMessage" onclick="sendMessage();">Send</button>
         </div>
