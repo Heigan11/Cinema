@@ -34,8 +34,8 @@ public class UserSession {
     @Column(name = "ip")
     private String ip;
 
-    private String tableDate;
-    private String tableTime;
-    private static final DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("MMMM dd, yyyy");
-    private static final DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("HH:mm");
+//    private String tableDate;
+//    private String tableTime;
+//    private static final DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("MMMM dd, yyyy");
+//    private static final DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("HH:mm");
 }

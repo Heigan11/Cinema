@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.servlet.http.HttpSession;
+
 @RequiredArgsConstructor
 @Controller
 public class ProfileController {
@@ -19,6 +21,17 @@ public class ProfileController {
         // list of sessions
         // list of uploaded avatars
         // current avatar
+
+//        HttpSession session = req.getSession();
+//        if (session.getAttribute("user") != null) {
+//            User user = (User) session.getAttribute("user");
+//            req.setAttribute("user", user);
+//            req.setAttribute("userSessions", sessionService.getAllUserSession(user));
+//            req.setAttribute("userImages", imageService.getAllUserImages(user));
+//            session.setAttribute("image", imageService.getImageByUserId(user));
+//            req.getRequestDispatcher("WEB-INF/jsp/profile.jsp").forward(req, resp);
+//        }
+
         return "profile";
     }
 }

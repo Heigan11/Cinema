@@ -10,4 +10,5 @@ public interface UserService {
     public void removeUser(Long id);
     public List<User> getUserByName(String name);
     public boolean isUser(User user);
+    public User findUserById(Long id);
 }

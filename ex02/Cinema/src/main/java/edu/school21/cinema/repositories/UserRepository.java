@@ -11,4 +11,5 @@ public interface UserRepository {
     public void saveUser(User user);
     public void removeUser(Long id);
     public List<User> getUserByName(String name);
+    public User findUserById(Long id);
 }

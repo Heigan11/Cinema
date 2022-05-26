@@ -18,8 +18,9 @@ public class UserAvatar {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "userId")
-    private Long userId;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id",referencedColumnName = "id")
+    private User user;
 
     @Column(name = "originalName")
     private String originalName;
@@ -36,5 +37,5 @@ public class UserAvatar {
     @Column(name = "mimetype")
     private String mimetype;
 
-    private String tableSize;
+//    private String tableSize;
 }
