@@ -3,13 +3,13 @@
     <meta charset="UTF-8">
     <head>
         <style>
-            a {
+            .a {
                 padding: 10px 0;
                 border-width: 0;
                 border-radius: 1em;
                 display: block;
                 width: 500px;
-                height: 30px;
+                height: 60px;
                 margin: auto;
                 background: #60e6c5;
                 color: black;
@@ -107,6 +107,7 @@
 
         </style>
         <title>Chat WebSocket</title>
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.0/sockjs.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.js"></script>
         <script type="text/javascript">
@@ -209,20 +210,20 @@
         </script>
 </head>
 <body onload="disconnect()">
-<div>
-    <a> ${movie.title}'s CHAT </a>
-    <br />
-    <div>
+<div class="w3-panel" style="display:flex;flex-direction: column;justify-content: center; align-items: center; padding: 10px; margin: 10px;">
+    <div class="a" style="padding: 10px; margin: 10px;">
+        ${movie.title}'s CHAT
+    </div>
+    <div style="padding: 10px; margin: 10px;">
         <button id="connect" onclick="connect();">Connect</button>
         <button id="disconnect" disabled="disabled" onclick="disconnect();">
             Disconnect
         </button>
         <button id="profile" onclick="location.href='/admin/panel/profile'">Profile</button>
     </div>
-    <br/>
-    <div id="conversationDiv">
-        <div id="chat-page" class="chat" style="background-color: #9E9C9C">
-            <div id="messageArea"> </div>
+    <div id="conversationDiv" style="display:flex;flex-direction: column;justify-content: center; align-items: center; padding: 10px; margin: 10px;">
+        <div id="chat-page" class="chat" style="background-color: #9E9C9C; width: 100%;">
+            <div id="messageArea" style="width: 100%;"> </div>
         </div>
         <#list history as message>
         <script>
@@ -230,8 +231,10 @@
         </script>
         </#list>
         <br/>
-        <input type="text" id="text" placeholder="Write a message..."/>
-        <button id="sendMessage" onclick="sendMessage();">Send</button>
+        <div style="padding: 10px; margin: 10px;">
+            <input type="text" id="text" placeholder="Write a message..."/>
+            <button id="sendMessage" onclick="sendMessage();">Send</button>
+        </div>
         <br/>
         <p id="response"></p>
     </div>
