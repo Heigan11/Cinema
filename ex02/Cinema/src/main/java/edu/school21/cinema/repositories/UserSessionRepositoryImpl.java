@@ -23,8 +23,9 @@ public class UserSessionRepositoryImpl implements UserSessionRepository {
 
     @Override
     public List<UserSession> findAllByUserId(Long id) {
-        return entityManager.createQuery("Select f from UserSession as f where f.user.id = :id", UserSession.class)
+        return entityManager.createQuery("Select f from UserSession as f where f.user.id = :id order by f.id desc", UserSession.class)
                 .setParameter("id", id)
+                .setMaxResults(5)
                 .getResultList();
     }
 }

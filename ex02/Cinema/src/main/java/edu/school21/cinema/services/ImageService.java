@@ -4,6 +4,7 @@ import edu.school21.cinema.models.User;
 import edu.school21.cinema.models.UserAvatar;
 import edu.school21.cinema.repositories.UserAvatarRepository;
 import edu.school21.cinema.repositories.UserRepositoryImpl;
+import org.springframework.stereotype.Service;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +17,7 @@ import java.nio.file.StandardCopyOption;
 import java.util.List;
 import java.util.UUID;
 
+@Service
 public class ImageService {
 
     private final UserAvatarRepository userAvatarRepository;

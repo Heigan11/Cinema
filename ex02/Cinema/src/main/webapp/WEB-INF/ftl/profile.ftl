@@ -1,7 +1,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Cinema</title>
+    <title>Profile</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <style>
         h2 {
             padding: 10px 0;
@@ -82,67 +83,84 @@
         }
     </style>
 </head>
-<body>
 
-<h2>Movies list</h2>
-<div class="tables">
-    <table width="1200">
+<body>
+<div class="w3-panel" style="display:flex;justify-content: center;flex-wrap: wrap">
+    <div style="flex: 0 0 20%; padding-right: 10px">
+        <img src='images/${user.id}/${image.uniqueName}' width="300" height="300"
+        class="w3-image w3-round">
+
+        <form method="post" action="/upload" enctype="multipart/form-data">
+            <br>
+            <input type="file" name="file" class="w3-input">
+            <button type="submit" class="w3-button w3-block w3-cyan w3-ripple w3-padding">Upload</button>
+        </form>
+    </div>
+
+    <div style="flex: 0 0 40%;">
+        <h3>
+            ${user.name}
+        </h3>
+
+        <table class="w3-table w3-bordered w3-centered w3-card">
+            <thead>
+            <tr class="w3-cyan">
+                <th>Date</th>
+                <th>Time</th>
+                <th>IP</th>
+            </tr>
+            </thead>
+            <tbody>
+                <#list usersessions as sess>
+                <tr>
+                    <td>${sess.date}</td>
+                    <td>${sess.time}</td>
+                    <td>${sess.ip}</td>
+                </tr>
+            </#list>
+            </tbody>
+        </table>
+    </div>
+
+    <table class="w3-table w3-bordered w3-centered w3-card" style="width: 60%">
         <thead>
-        <tr>
-            <th>Id</th>
-            <th>Title</th>
-            <th>Year</th>
-            <th>Restriction</th>
-            <th>Description</th>
-            <th>Poster</th>
-            <th>Add poster</th>
-            <th>Chat</th>
-            <th>Delete</th>
+        <tr class="w3-cyan">
+            <th>File name</th>
+            <th>Size</th>
+            <th>MIME</th>
+            <th>Set as avatar</th>
         </tr>
         </thead>
         <tbody>
-        <#list movies as movie>
+        <#list images as img>
             <tr>
-                <td>${movie.id}</td>
-                <td>${movie.title}</td>
-                <td>${movie.yearOfRelease}</td>
-                <td>${movie.ageRestrictions}</td>
-                <td>${movie.description}</td>
+                <td> <a href="/images/${user.id}/${img.uniqueName}" target="_blank"  ${img.originalName} </a></td>
+                <td>${img.size}</td>
+                <td>${img.mimetype}</td>
                 <td>
-                    <img src='/admin/panel/films/image/${movie.id}' style="height: 100px; width: 150px;">
-                </td>
-                <td>
-                    <form method="post" action="/admin/panel/films/addPoster/${movie.id}" enctype="multipart/form-data">
-                        <br>
-                        <input type="file" name="file">
-                        <button type="submit">Upload</button>
+                    <form method="post" action="setImage">
+                        <div class="w3-padding" align="center">
+                            <button type="submit"
+                                    class="w3-button w3-block w3-cyan w3-ripple"
+                                    value="${img.id}" name="img">set
+                            </button>
+                        </div>
                     </form>
-                </td>
-                <td>
-                    <#if Session.user??>
-                        <a href="/films/${movie.id}/chat">Chat</a>
-                    </#if>
-                    <#if !Session.user??>
-                        <a href="/entrance">Chat</a>
-                    </#if>
-                </td>
-                <td>
-                    <a href="/admin/panel/films/delete/${movie.id}">delete</a>
                 </td>
             </tr>
         </#list>
+
         </tbody>
     </table>
-</div>
-<div class="formAdd">
-    <form method="post" action="/admin/panel/films" name="movie">
-        <p><b>Add film</b><br>
-            <input title="Title" placeholder="Title" type="text" name="title" size="15" required pattern="^[0-9a-zA-Z ]+$">
-            <input title="yearOfRelease" placeholder="Year of release" type="text" name="yearOfRelease" size="10" required pattern="^[0-9]+$">
-            <input title="ageRestrictions" placeholder="Age restrictions" type="text" name="ageRestrictions" size="10" required pattern="^[0-9]+$">
-            <input title="description" placeholder="Description" type="text" name="description" size="20" required >
-            <button type="submit">Add film</button>
+
+    <form method="get" action="logout" style="width: 60%">
+        <div class="w3-padding">
+            <button type="submit" class="w3-button w3-block w3-section w3-pale-blue w3-ripple w3-padding">
+                Logout
+            </button>
+        </div>
     </form>
 </div>
+
 </body>
 </html>
