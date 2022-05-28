@@ -87,10 +87,8 @@
 <body>
 <div class="w3-panel" style="display:flex;justify-content: center;flex-wrap: wrap">
     <div style="flex: 0 0 20%; padding-right: 10px">
-        <img src='images/${user.id}/${image.uniqueName}' width="300" height="300"
-        class="w3-image w3-round">
-
-        <form method="post" action="/upload" enctype="multipart/form-data">
+        <img src='/profile/image/${user.id}' width="300" class="w3-image w3-round">
+        <form method="post" action="/uploadAvatar/${user.id}" enctype="multipart/form-data">
             <br>
             <input type="file" name="file" class="w3-input">
             <button type="submit" class="w3-button w3-block w3-cyan w3-ripple w3-padding">Upload</button>
@@ -134,11 +132,11 @@
         <tbody>
         <#list images as img>
             <tr>
-                <td> <a href="images/${user.id}/${img.uniqueName}" target="_blank">${img.originalName}</a></td>
+                <td> <a href="./images/${user.id}/${img.uniqueName}" target="_blank">${img.originalName}</a></td>
                 <td>${img.size}</td>
                 <td>${img.mimetype}</td>
                 <td>
-                    <form method="post" action="setImage">
+                    <form method="post" action="setImage/${user.id}">
                         <div class="w3-padding" align="center">
                             <button type="submit"
                                     class="w3-button w3-block w3-cyan w3-ripple"

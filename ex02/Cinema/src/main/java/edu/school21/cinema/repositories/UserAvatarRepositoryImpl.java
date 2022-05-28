@@ -22,8 +22,9 @@ public class UserAvatarRepositoryImpl implements UserAvatarRepository{
 
     @Override
     public List<UserAvatar> findAllByUserId(Long id) {
-        return entityManager.createQuery("Select f from UserAvatar as f where f.user.id = :id", UserAvatar.class)
+        return entityManager.createQuery("Select f from UserAvatar as f where f.user.id = :id order by f.id desc", UserAvatar.class)
                 .setParameter("id", id)
+                .setMaxResults(5)
                 .getResultList();
     }
 

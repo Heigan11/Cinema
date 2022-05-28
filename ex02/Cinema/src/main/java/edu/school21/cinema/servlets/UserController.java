@@ -37,7 +37,7 @@ public class UserController {
 
         String tempPassword = user.getPassword();
         user.setPassword(passwordEncoder.encode(tempPassword));
-        user.setAvatarId(1L);
+        user.setAvatarId(0L);
         userService.saveUser(user);
 
         return "redirect:/admin/panel/films";

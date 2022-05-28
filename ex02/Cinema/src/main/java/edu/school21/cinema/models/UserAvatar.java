@@ -37,5 +37,4 @@ public class UserAvatar {
     @Column(name = "mimetype")
     private String mimetype;
 
-//    private String tableSize;
 }
