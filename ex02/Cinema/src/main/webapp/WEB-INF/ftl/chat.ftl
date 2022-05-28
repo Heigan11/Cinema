@@ -219,6 +219,7 @@
         <button id="disconnect" disabled="disabled" onclick="disconnect();">
             Disconnect
         </button>
+        <button id="profile" onclick="location.href='/profile'">Profile</button>
     </div>
     <div id="conversationDiv" style="display:flex;flex-direction: column;justify-content: center; align-items: center; padding: 10px; margin: 10px;">
         <div id="chat-page" class="chat" style="background-color: #9E9C9C; width: 100%;">

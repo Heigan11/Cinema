@@ -5,6 +5,7 @@ import edu.school21.cinema.models.User;
 import edu.school21.cinema.services.HallService;
 import edu.school21.cinema.services.SessionService;
 import edu.school21.cinema.services.UserService;
+import edu.school21.cinema.services.UserSessionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -22,6 +23,7 @@ public class UserController {
 
     private final PasswordEncoder passwordEncoder;
     private final UserService userService;
+    private final UserSessionService userSessionService;
 
 
     @GetMapping("/signUp/{id}")
@@ -35,7 +37,9 @@ public class UserController {
 
         String tempPassword = user.getPassword();
         user.setPassword(passwordEncoder.encode(tempPassword));
+        user.setAvatarId(0L);
         userService.saveUser(user);
+
         return "redirect:/admin/panel/films";
 //        if (userService.isUser(user)) {
 //            HttpSession session = req.getSession();
@@ -56,6 +60,8 @@ public class UserController {
         if (userService.isUser(user)) {
             HttpSession session = req.getSession();
             session.setAttribute("user", userService.getUserByName(user.getName()).get(0));
+            userSessionService.saveSession(user, req.getRemoteAddr());
+
 //            return "redirect:/admin/panel/films";
             return "redirect:/films/" + id + "/chat";
         }

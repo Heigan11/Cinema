@@ -113,7 +113,7 @@
                 <td>${movie.ageRestrictions}</td>
                 <td>${movie.description}</td>
                 <td>
-                    <img src='/admin/panel/films/image/${movie.id}' style="height: 100px; width: 150px;">
+                    <img src='/admin/panel/films/image/${movie.id}' style="height: 100px;">
                 </td>
                 <td>
                 <form method="post" action="/admin/panel/films/addPoster/${movie.id}" enctype="multipart/form-data">
