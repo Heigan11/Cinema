@@ -5,8 +5,12 @@ import edu.school21.cinema.models.Movie;
 import java.util.List;
 
 public interface MovieService {
-    public void saveMovie(Movie movie);
-    public void removeMovie(Long id);
-    public Movie getMovieById(Long id);
-    public List<Movie> findAllMovies();
+
+    void saveMovie(Movie movie);
+
+    void removeMovie(Long id);
+
+    Movie getMovieById(Long id);
+
+    List<Movie> findAllMovies();
 }

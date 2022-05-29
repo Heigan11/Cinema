@@ -1,14 +1,11 @@
 package edu.school21.cinema.repositories;
 
-import edu.school21.cinema.models.Message;
-import edu.school21.cinema.models.User;
 import edu.school21.cinema.models.User;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -26,7 +23,7 @@ public class UserRepositoryImpl implements UserRepository {
             if (temp != null) {
                 entityManager.merge(user);
             }
-        } else if (getUserByName(user.getName()).isEmpty()){
+        } else if (getUserByName(user.getName()).isEmpty()) {
             System.out.println("New user before merge: " + user);
             entityManager.merge(user);
         }

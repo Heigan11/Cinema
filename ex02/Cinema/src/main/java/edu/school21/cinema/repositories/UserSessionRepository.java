@@ -7,6 +7,8 @@ import java.util.List;
 
 @Repository
 public interface UserSessionRepository {
-    public void addUserSession(UserSession userSession);
-    public List<UserSession> findAllByUserId(Long id);
+
+    void addUserSession(UserSession userSession);
+
+    List<UserSession> findAllByUserId(Long id);
 }

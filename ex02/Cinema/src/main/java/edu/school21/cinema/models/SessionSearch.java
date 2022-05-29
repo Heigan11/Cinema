@@ -8,7 +8,7 @@ public class SessionSearch {
     private String dateTime;
     private Film film;
 
-    public SessionSearch(Session session){
+    public SessionSearch(Session session) {
         this.id = session.getId();
         this.dateTime = session.getDate();
         this.film = new Film(session.getMovie());

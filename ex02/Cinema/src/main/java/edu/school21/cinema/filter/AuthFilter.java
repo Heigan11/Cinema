@@ -26,13 +26,13 @@ public class AuthFilter implements Filter {
 
         final HttpSession session = req.getSession();
 
-        if(!StringUtils.isEmpty(requestURI) &&
+        if (!StringUtils.isEmpty(requestURI) &&
                 ((requestURI.contains("signIn") || requestURI.contains("signUp") || requestURI.contains("entrance"))
-                        && session.getAttribute("user") != null)){
+                        && session.getAttribute("user") != null)) {
             resp.sendRedirect("/admin/panel/films");
             return;
         }
-        if (session.getAttribute("user") == null && requestURI.contains("/films/{id}/chat")){
+        if (session.getAttribute("user") == null && requestURI.contains("/films/{id}/chat")) {
             resp.sendError(HttpServletResponse.SC_FORBIDDEN);
             return;
         }

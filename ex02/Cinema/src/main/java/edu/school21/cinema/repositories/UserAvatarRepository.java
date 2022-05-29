@@ -7,7 +7,10 @@ import java.util.List;
 
 @Repository
 public interface UserAvatarRepository {
-    public UserAvatar save(UserAvatar userAvatar);
-    public List<UserAvatar> findAllByUserId(Long id);
-    public UserAvatar findById(Long id);
+
+    UserAvatar save(UserAvatar userAvatar);
+
+    List<UserAvatar> findAllByUserId(Long id);
+
+    UserAvatar findById(Long id);
 }

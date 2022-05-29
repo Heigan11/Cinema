@@ -17,7 +17,7 @@ public class HallsController {
     private final HallService hallService;
 
     @GetMapping("/")
-    public String index(){
+    public String index() {
         return "index";
     }
 
@@ -38,15 +38,13 @@ public class HallsController {
         System.out.println("====" + hall);
         if (hall != null)
             hallService.saveHall(hall);
-//            hallService.updateHall(hall);
         return "redirect:/admin/panel/halls";
     }
 
     @PostMapping("/admin/panel/halls")
-    public String addhall(@ModelAttribute("hall") Hall hall){
+    public String addhall(@ModelAttribute("hall") Hall hall) {
         if (hall != null)
             hallService.saveHall(hall);
-//            hallService.addHall(hall);
         return "redirect:/admin/panel/halls";
     }
 }

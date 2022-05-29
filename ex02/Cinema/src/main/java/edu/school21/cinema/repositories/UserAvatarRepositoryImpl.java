@@ -10,7 +10,7 @@ import java.util.List;
 
 @Repository
 @Transactional
-public class UserAvatarRepositoryImpl implements UserAvatarRepository{
+public class UserAvatarRepositoryImpl implements UserAvatarRepository {
 
     @PersistenceContext
     private EntityManager entityManager;

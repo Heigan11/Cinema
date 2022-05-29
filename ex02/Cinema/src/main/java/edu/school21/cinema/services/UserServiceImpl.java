@@ -2,17 +2,16 @@ package edu.school21.cinema.services;
 
 import edu.school21.cinema.models.User;
 import edu.school21.cinema.repositories.UserRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@RequiredArgsConstructor
 @Service
-public class UserServiceImpl implements UserService{
+@AllArgsConstructor
+public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
@@ -20,7 +19,7 @@ public class UserServiceImpl implements UserService{
     @Override
     @Transactional
     public void saveUser(User user) {
-            this.userRepository.saveUser(user);
+        this.userRepository.saveUser(user);
     }
 
     @Override
@@ -37,13 +36,15 @@ public class UserServiceImpl implements UserService{
 
     @Override
     @Transactional(readOnly = true)
-    public boolean isUser(User user) {
-        if (user != null && user.getName() != null && user.getPassword() != null) {
-            List<User> users = getUserByName(user.getName());
+    public User authorizeUser(String name, String password) {
+        if (name != null && password != null) {
+            List<User> users = getUserByName(name);
             if (users != null && users.size() == 1)
-                return passwordEncoder.matches(user.getPassword(), users.get(0).getPassword());
+                if (passwordEncoder.matches(password, users.get(0).getPassword())) {
+                    return users.get(0);
+                }
         }
-        return false;
+        return null;
     }
 
     @Override

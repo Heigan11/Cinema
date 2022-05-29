@@ -2,26 +2,22 @@ package edu.school21.cinema.services;
 
 import edu.school21.cinema.models.Message;
 import edu.school21.cinema.repositories.MessageRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
-public class MessageServiceImpl implements MessageService{
+@AllArgsConstructor
+public class MessageServiceImpl implements MessageService {
 
     private final MessageRepository messageRepository;
-
-    @Autowired
-    public MessageServiceImpl(MessageRepository messageRepository) {
-        this.messageRepository = messageRepository;
-    }
 
     @Override
     @Transactional
     public void saveMessage(Message message) {
-            this.messageRepository.saveMessage(message);
+        this.messageRepository.saveMessage(message);
     }
 
     @Override

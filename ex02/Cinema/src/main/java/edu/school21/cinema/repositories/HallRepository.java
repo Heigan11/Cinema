@@ -7,8 +7,12 @@ import java.util.List;
 
 @Repository
 public interface HallRepository {
-    public void saveHall(Hall hall);
-    public void removeHall(int id);
-    public Hall getHallById(int id);
-    public List<Hall> listHalls();
+
+    void saveHall(Hall hall);
+
+    void removeHall(int id);
+
+    Hall getHallById(int id);
+
+    List<Hall> listHalls();
 }

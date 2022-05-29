@@ -1,6 +1,5 @@
 package edu.school21.cinema.servlets;
 
-import edu.school21.cinema.models.Movie;
 import edu.school21.cinema.models.User;
 import edu.school21.cinema.models.UserAvatar;
 import edu.school21.cinema.services.ImageService;
@@ -45,12 +44,12 @@ public class ProfileController {
     @ResponseBody
     public byte[] getContent(@PathVariable("id") Long id) {
         try {
-        Path currentRelativePath = Paths.get("");
-        String s = currentRelativePath.toRealPath().toString();
-        User user = userService.findUserById(id);
-        if(user.getAvatarId() == 0L) {
-            return FileUtils.readFileToByteArray(new File(s + "/src/main/webapp/images/default_avatar.png"));
-        }
+            Path currentRelativePath = Paths.get("");
+            String s = currentRelativePath.toRealPath().toString();
+            User user = userService.findUserById(id);
+            if (user.getAvatarId() == 0L) {
+                return FileUtils.readFileToByteArray(new File(s + "/src/main/webapp/images/default_avatar.png"));
+            }
             UserAvatar pic = imageService.getImageByUserId(user);
             if (pic.getFilepath() == null)
                 return FileUtils.readFileToByteArray(new File(s + "/src/main/webapp/images/default_avatar.png"));
@@ -64,8 +63,7 @@ public class ProfileController {
     public String addAvatar(@RequestParam("file") MultipartFile file, @PathVariable("id") Long id) throws IOException {
         if (file.getContentType().equals("image/png") ||
                 file.getContentType().equals("image/jpeg") ||
-                file.getContentType().equals("image/webp"))
-        {
+                file.getContentType().equals("image/webp")) {
             String fileName = file.getOriginalFilename();
             String type = file.getContentType();
             long size = file.getSize();
@@ -73,7 +71,7 @@ public class ProfileController {
 
             Path currentRelativePath = Paths.get("");
             String s = currentRelativePath.toRealPath().toString();
-            String dirPath =  s + "/src/main/webapp/images/" + id + "/";
+            String dirPath = s + "/src/main/webapp/images/" + id + "/";
 
             Path path = Paths.get(dirPath + uniqueName);
             file.transferTo(path);

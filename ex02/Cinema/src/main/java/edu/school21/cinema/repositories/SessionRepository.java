@@ -7,10 +7,16 @@ import java.util.List;
 
 @Repository
 public interface SessionRepository {
-    public void addSession(Session session);
-    public void updateSession(Session session);
-    public void removeSession(Long id);
-    public Session getSessionById(Long id);
-    public List<Session> listSessions();
-    public List<Session> getSessionByFilm(String filmName);
+
+    void addSession(Session session);
+
+    void updateSession(Session session);
+
+    void removeSession(Long id);
+
+    Session getSessionById(Long id);
+
+    List<Session> listSessions();
+
+    List<Session> getSessionByFilm(String filmName);
 }

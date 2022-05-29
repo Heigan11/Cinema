@@ -19,7 +19,7 @@ public class UserAvatar {
     private Long id;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id",referencedColumnName = "id")
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
     @Column(name = "originalName")
@@ -36,5 +36,4 @@ public class UserAvatar {
 
     @Column(name = "mimetype")
     private String mimetype;
-
 }

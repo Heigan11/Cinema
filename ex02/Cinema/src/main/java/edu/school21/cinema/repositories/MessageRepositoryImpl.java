@@ -56,9 +56,4 @@ public class MessageRepositoryImpl implements MessageRepository {
         Collections.reverse(messageList);
         return messageList;
     }
-
-//    @Override
-//    public List<Message> getChatHistory(Long id){
-//        return entityManager.createQuery("Select f from Message as f order by f.id", Message.class).getResultList();
-//    }
 }

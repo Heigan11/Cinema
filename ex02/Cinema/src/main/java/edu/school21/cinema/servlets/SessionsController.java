@@ -22,7 +22,7 @@ public class SessionsController {
     private final SessionService sessionService;
     private final MovieService movieService;
     private final HallService hallService;
-    
+
     @GetMapping("/admin/panel/sessions")
     public String Sessions(Model model) {
         model.addAttribute("sessions", sessionService.listSessions());
@@ -50,13 +50,13 @@ public class SessionsController {
     public String addSession(@ModelAttribute("date") String date,
                              @ModelAttribute("cost") int cost,
                              @ModelAttribute("movie") Long movie_id,
-                             @ModelAttribute("hall") int hall_id){
+                             @ModelAttribute("hall") int hall_id) {
 
         LocalDateTime dateTime = LocalDateTime.parse(date);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         String formattedDateTime = dateTime.format(formatter);
 
-        sessionService.addSession(new Session(0L,formattedDateTime, cost,
+        sessionService.addSession(new Session(0L, formattedDateTime, cost,
                 movieService.getMovieById(movie_id), hallService.getHallById(hall_id)));
         return "redirect:/admin/panel/sessions";
     }

@@ -6,16 +6,15 @@ public class CinemaWebApplicationInitializer extends AbstractAnnotationConfigDis
     @Override
     protected Class<?>[] getRootConfigClasses() {
         return null;
-//        return new Class[] { };
     }
 
     @Override
     protected Class<?>[] getServletConfigClasses() {
-        return new Class[] {CinemaSpringConfig.class};
+        return new Class[]{CinemaSpringConfig.class};
     }
 
     @Override
     protected String[] getServletMappings() {
-        return new String[] {"/"};
+        return new String[]{"/"};
     }
 }

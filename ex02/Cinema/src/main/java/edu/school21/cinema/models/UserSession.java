@@ -5,7 +5,6 @@ import lombok.*;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 
 @Getter
 @Setter
@@ -22,7 +21,7 @@ public class UserSession {
     private Long id;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id",referencedColumnName = "id")
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
     @Column(name = "sessionDate")
@@ -33,9 +32,4 @@ public class UserSession {
 
     @Column(name = "ip")
     private String ip;
-
-//    private String tableDate;
-//    private String tableTime;
-//    private static final DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("MMMM dd, yyyy");
-//    private static final DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("HH:mm");
 }

@@ -25,7 +25,6 @@ public class MoviesController {
 
     private final MovieService movieService;
     private final MessageService messageService;
-    private final UserService userService;
 
     @GetMapping("/admin/panel/films")
     public String Movies(Model model) {
@@ -63,11 +62,10 @@ public class MoviesController {
 
         if (file.getContentType().equals("image/png") ||
                 file.getContentType().equals("image/jpeg") ||
-                file.getContentType().equals("image/webp"))
-        {
+                file.getContentType().equals("image/webp")) {
             Path currentRelativePath = Paths.get("");
             String s = currentRelativePath.toRealPath().toString();
-            String dirPath =  s + "/src/main/webapp/images/" + id + "/";
+            String dirPath = s + "/src/main/webapp/images/" + id + "/";
 
             File f = new File(dirPath);
             if (!f.exists())
@@ -88,12 +86,12 @@ public class MoviesController {
     }
 
     @PostMapping("/admin/panel/films")
-    public String addMovie(@ModelAttribute("movie") Movie movie){
+    public String addMovie(@ModelAttribute("movie") Movie movie) {
         movieService.saveMovie(movie);
         return "redirect:/admin/panel/films";
     }
 
-    @GetMapping ("/entrance/{id}")
+    @GetMapping("/entrance/{id}")
     public String entrance(@PathVariable("id") Long id, Model model) {
         model.addAttribute("id", id);
         return "entrance";

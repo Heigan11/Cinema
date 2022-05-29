@@ -2,21 +2,17 @@ package edu.school21.cinema.services;
 
 import edu.school21.cinema.models.Session;
 import edu.school21.cinema.repositories.SessionRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 
 @Service
-public class SessionServiceImpl implements SessionService{
+@AllArgsConstructor
+public class SessionServiceImpl implements SessionService {
 
     private final SessionRepository sessionRepository;
-
-    @Autowired
-    public SessionServiceImpl(SessionRepository sessionRepository) {
-        this.sessionRepository = sessionRepository;
-    }
 
     @Override
     @Transactional
@@ -45,12 +41,12 @@ public class SessionServiceImpl implements SessionService{
     @Override
     @Transactional(readOnly = true)
     public List<Session> listSessions() {
-        return this.sessionRepository.listSessions() ;
+        return this.sessionRepository.listSessions();
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<Session> getSessionByFilm(String filmName) {
-        return this.sessionRepository.getSessionByFilm(filmName) ;
+        return this.sessionRepository.getSessionByFilm(filmName);
     }
 }

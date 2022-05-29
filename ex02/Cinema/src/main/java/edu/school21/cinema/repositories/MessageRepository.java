@@ -7,9 +7,14 @@ import java.util.List;
 
 @Repository
 public interface MessageRepository {
-    public void saveMessage(Message message);
-    public void removeMessage(Long id);
-    public Message getMessageById(Long id);
-    public List<Message> listMessages();
-    public List<Message> getChatHistory(Long id);
+
+    void saveMessage(Message message);
+
+    void removeMessage(Long id);
+
+    Message getMessageById(Long id);
+
+    List<Message> listMessages();
+
+    List<Message> getChatHistory(Long id);
 }

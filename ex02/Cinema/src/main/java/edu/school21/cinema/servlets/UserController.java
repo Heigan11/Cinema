@@ -1,21 +1,19 @@
 package edu.school21.cinema.servlets;
 
-import edu.school21.cinema.models.Hall;
 import edu.school21.cinema.models.User;
-import edu.school21.cinema.services.HallService;
-import edu.school21.cinema.services.SessionService;
 import edu.school21.cinema.services.UserService;
 import edu.school21.cinema.services.UserSessionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
 
 @RequiredArgsConstructor
 @Controller
@@ -33,20 +31,13 @@ public class UserController {
     }
 
     @PostMapping("/signUp/{film_id}")
-    public String registerUser(@ModelAttribute("user") User user,@PathVariable("film_id") Long film_id, HttpServletRequest req) {
-
+    public String registerUser(@ModelAttribute("user") User user, @PathVariable("film_id") Long film_id) {
         String tempPassword = user.getPassword();
         user.setPassword(passwordEncoder.encode(tempPassword));
         user.setAvatarId(0L);
         userService.saveUser(user);
 
         return "redirect:/admin/panel/films";
-//        if (userService.isUser(user)) {
-//            HttpSession session = req.getSession();
-//            session.setAttribute("user", userService.getUserByName(user.getName()).get(0));
-//            return "redirect:/films/" + film_id + "/chat";
-//        }
-//        return "redirect:/signUp/" + film_id;
     }
 
     @GetMapping("/signIn/{id}")
@@ -56,13 +47,15 @@ public class UserController {
     }
 
     @PostMapping("/signIn/{id}")
-    public String loginUser(@ModelAttribute("user") User user, @PathVariable("id") Long id, HttpServletRequest req) {
-        if (userService.isUser(user)) {
+    public String loginUser(@PathVariable("id") Long id,
+                            @ModelAttribute("name") String name,
+                            @ModelAttribute("password") String password,
+                            HttpServletRequest req) {
+        User user = userService.authorizeUser(name, password);
+        if (user != null) {
             HttpSession session = req.getSession();
-            session.setAttribute("user", userService.getUserByName(user.getName()).get(0));
+            session.setAttribute("user", user);
             userSessionService.saveSession(user, req.getRemoteAddr());
-
-//            return "redirect:/admin/panel/films";
             return "redirect:/films/" + id + "/chat";
         }
         return "redirect:/signIn/" + id;
