@@ -4,7 +4,6 @@ import edu.school21.cinema.models.Movie;
 import edu.school21.cinema.models.User;
 import edu.school21.cinema.services.MessageService;
 import edu.school21.cinema.services.MovieService;
-import edu.school21.cinema.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Controller;

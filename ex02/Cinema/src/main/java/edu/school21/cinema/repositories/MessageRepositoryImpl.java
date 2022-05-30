@@ -19,13 +19,11 @@ public class MessageRepositoryImpl implements MessageRepository {
     @Override
     public void saveMessage(Message message) {
         if (message.getId() != null) {
-            System.out.println("Update message : " + message);
             Message temp = entityManager.find(Message.class, message.getId());
             if (temp != null) {
                 entityManager.merge(message);
             }
         } else {
-            System.out.println("New message before merge: " + message);
             entityManager.merge(message);
         }
     }

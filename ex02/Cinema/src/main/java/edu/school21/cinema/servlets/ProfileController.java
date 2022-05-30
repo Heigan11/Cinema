@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
@@ -29,7 +30,13 @@ public class ProfileController {
     private final ImageService imageService;
 
     @GetMapping("/profile")
-    public String profile(Model model, HttpServletRequest req) {
+    public String profile(Model model, HttpServletRequest req, HttpServletResponse resp) throws IOException {
+
+        if (req.getSession().getAttribute("user") == null) {
+            resp.sendError(HttpServletResponse.SC_FORBIDDEN);
+            return "index";
+        }
+
         HttpSession session = req.getSession();
         User user = (User) session.getAttribute("user");
         model.addAttribute("usersessions", userSessionService.getAllUserSession(user));
@@ -71,7 +78,11 @@ public class ProfileController {
 
             Path currentRelativePath = Paths.get("");
             String s = currentRelativePath.toRealPath().toString();
-            String dirPath = s + "/src/main/webapp/images/" + id + "/";
+            String dirPath = s + "/src/main/webapp/images/avatars/";
+
+            File f = new File(dirPath);
+            if (!f.exists())
+                f.mkdir();
 
             Path path = Paths.get(dirPath + uniqueName);
             file.transferTo(path);

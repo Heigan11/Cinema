@@ -10,3 +10,9 @@ drop table if exists halls cascade;
 CREATE TABLE halls(
                       id SERIAL PRIMARY KEY,
                       seats integer not null);
+drop table if exists avatars cascade;
+drop table if exists chat_messages cascade;
+drop table if exists chat_user cascade;
+drop table if exists sessions cascade;
+drop table if exists sessionuser cascade;
+

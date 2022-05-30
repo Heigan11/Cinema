@@ -18,13 +18,11 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public void saveUser(User user) {
         if (user.getId() != null) {
-            System.out.println("Update user : " + user);
             User temp = entityManager.find(User.class, user.getId());
             if (temp != null) {
                 entityManager.merge(user);
             }
         } else if (getUserByName(user.getName()).isEmpty()) {
-            System.out.println("New user before merge: " + user);
             entityManager.merge(user);
         }
     }
