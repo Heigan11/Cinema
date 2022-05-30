@@ -7,8 +7,6 @@ import java.util.List;
 
 @Repository
 public interface HallRepository {
-//    public void addHall(Hall hall);
-//    public void updateHall(Hall hall);
     public void saveHall(Hall hall);
     public void removeHall(int id);
     public Hall getHallById(int id);

@@ -33,12 +33,6 @@ public class HallRepositoryImpl implements HallRepository {
             entityManager.remove(hall);
     }
 
-//    @Override
-//    public void removeHall(int id) {
-//        Query query = entityManager.createQuery("Delete from Hall c where c.id = :id");
-//        query.setParameter("id", id).executeUpdate();
-//    }
-
     @Override
     public Hall getHallById(int id) {
         return entityManager.find(Hall.class, id);
